@@ -1,0 +1,1221 @@
+ChIP-seq Intro 
+========================================================
+author:MRC CSC Bioinformatics Core
+date:[http://bioinformatics.csc.mrc.ac.uk/training.html]
+width: 1440
+height: 1100
+autosize: true
+font-import: <link href='http://fonts.googleapis.com/css?family=Slabo+27px' rel='stylesheet' type='text/css'>
+font-family: 'Slabo 27px', serif;
+css:style.css
+
+ChIP-seq introduction 
+========================================================
+
+Chromatin precipitation followed by deep sequencing (**ChIP-seq**) is a well established technique which allows for the genome wide identification of transcription factor binding sites and epigenetic marks. 
+
+![alt text](imgs/igsss_1.png)
+
+
+
+ChIP-seq introduction (continued)
+========================================================
+In this course we will use a few of the packages from the comprehensive repository available from the [Bioconductor project](https://www.bioconductor.org/).
+
+We will cover some of the basics of quality control, working with peaks, motif identification and functional analysis. 
+
+For more details on alignment, working with coverage and peak calling you can join us on our extended course and/or find some information here.
+
+========================================================
+
+* Where to find more information.
+* [ChIP-seq file types covered](#/filetypes).
+* [Story so far](#/background).
+* [Materials](#/materials).
+* [Assessing ChIP-seq quality](#/qc).
+* [Working with Peaks](#/peakpushing).
+* [Functional Annotation of peaks](#/functional).
+* [Denovo motifs](#/motifs).
+* [Differential ChIP-seq](#/diffchip).
+* [Getting hold of external data](#/external).
+* [Exporting data for Visualisation](#/viz).
+
+Reminder of file types
+========================================================
+id: filetypes
+
+In this session we will be dealing with two data types,
+
+* [BED/BED6 files](http://mrccsc.github.io/genomicFormats.html#/18).
+
+* [FASTA files](http://mrccsc.github.io/genomicFormats.html#/6).
+
+Reminder of file types - BED files
+========================================================
+
+* BED or BED 6 files are used to store genomic locations. 
+* A mimimum requirement is chromosome,start and end positions for intervals.
+* BED6 can additionally store interval name, score and strand.
+
+
+![alt text](imgs/bed6.png)
+
+Reminder of file types - FASTA files
+========================================================
+
+* FASTA files store sequence information alongside names for stored sequences.
+* Lines starting with ">" contains name and/or information on sequence.
+* Lines following contain contig sequence
+
+![alt text](imgs/fasta.png)
+
+Story so far.
+========================================================
+id: background
+
+In this course we will use some of the Encode data for Myc ChIP-seq in mouse aligned to the mm9 genome.
+
+This data is composed of Myc chip for two cell lines, Mel and Ch12 cell lines, each with two replicates.
+
+Due to the short time we have together the data will be already processed from unaligned reads to called peaks. 
+
+For full details on the analysis/processing of this data with all analysis steps covered in R/Bioconductor you can visit our course at WEBSITELINK.
+
+Materials.
+========================================================
+id: materials
+
+All material for this course can be found on github.
+* [short_ChIPseq](https://github.com/ThomasCarroll/short_ChIPseq/)
+
+Or can be downloaded as a zip archive from here. 
+* [Download zip](https://github.com/ThomasCarroll/short_ChIPseq/archive/2f6bc2972c80bb53ad9c59305ceeab5a76d597cd.zip)
+
+Materials. - Presentations, source code and practicals.
+========================================================
+
+Once the zip file in unarchived. All presentations as HTML slides and pages, their R code and HTML practical sheets will be available in the directories underneath.
+
+* **presentations/slides/**
+Presentations as an HTML slide show.
+* **presentations/singlepage/** 
+Presentations as an HTML single page.
+* **presentations/rcode/**
+R code in presentations.
+* **presentations/practicals/**
+Practicals as an HTML page. 
+
+Materials. - Data for presentations, practicals.
+========================================================
+
+All data to run code in the presentations and in the practicals is available in the zip archive. This includes raw data (MACS peak calls) as well R objects containing pre-compiled results.
+
+**data/Macs_peaks/**
+- MACS peak calls for 4 Myc ChIP-seq ending in *"_peaks.xls"*
++ 2 replicates of Myc ChIP from Mel cell-line (mycmelrep1,mycmelrep1) 
++ 2 replicates of Myc ChIP from Ch12 cell-line (mycch12rep1,mycch12rep1)
+
+**data/robjects/**
+- Robjects for further analysis or review
+
+
+Quality Control.
+========================================================
+id: qc
+
+ChIP-seq has many sources of potential noise including 
+* Varying efficiency of antibodies
+* Non-specific binding
+* Library complexity
+* ChIP artefacts and background.
+
+Many of these sources of noise can be assessed using some now well-established methodology.
+
+Quality Control - Quality metrics for ChIP-seq.
+========================================================
+
+The ChIPQC package wraps some of the metrics into a Bioconductor package and takes care to measure these metrics under the approriate condition. 
+
+To run a single sample through ChIPQCsample function, we must provide the a set of peaks, the relevant unfiltered BAM file and we are recommended to supply a **blacklist** GRanges and Genome name.
+
+```{r,eval=F} 
+QCresult <- ChIPQCsample(reads="/pathTo/myChIPreads.bam",
+                         peaks="/pathTo/myChIPpeaks.bed",
+                         genome="mm9",
+                         blacklist = "/pathTo/mm9_Blacklist.bed")
+```
+
+Quality Control 
+========================================================
+
+Although we may not have time in this practical, we can look at the full course to see how to create ChIPQCexperiment objects containing multiple samples' QC metrics.
+
+Here we can import the ChIPQCexperiment object from the course and take a look at some of the outputs. 
+
+The first useful function is QCmetrics which will provide a table of QC scores.
+
+```{r,eval=F,echo=T} 
+library(ChIPQC)
+load("robjects/ChIPQCwithPeaks.RData")
+QCmetrics(res)
+```
+
+
+```{r,eval=T,echo=F} 
+library(ChIPQC)
+load("robjects/ChIPQCwithPeaks.RData")
+knitr:::kable(QCmetrics(res))
+```
+
+
+
+Quality Control (Fraction of reads in peaks - FRIP/RIP)
+========================================================
+
+RIP/FRIP/PTIH/SPOT all are measurements of the fraction/percentage of reads landing in peaks. Variability in the proportion of reads in peaks for ChIP-seq samples can identify poorer quality replicates.
+
+```{r}
+frip(res)
+plotFrip(res)
+```
+
+
+Quality Control (Assessing fragment length)
+========================================================
+
+The prediction of fragment length is an essential part of ChIP-seq affecting peaks calling, summit identification and coverage profiles. 
+
+The use of cross-correlation or cross-coverage allows for an assessment of reads clustering by strand and so a measure of quality. 
+
+For more details on the use of cross-coverage in the assessment of ChIP-seq quality and identification of fragment length you can see our note here
+* [ChIP-seq cross-coverage/cross-correlation](http://mrccsc.github.io/analysisbeginings.html#/37).
+
+Quality Control (Assessing fragment length)
+========================================================
+ChIPQC has already calculated change in coverage between successive shifts of the "+" or "-" strand and we can plot these for inspection with the **plotCC** function. 
+
+```{r}
+ccplot <- plotCC(res)
+ccplot$layers <- ccplot$layers[1]
+ccplot
+```
+
+
+Quality Control - Blacklists and SSD.
+========================================================
+
+ChIP-seq will often show the presence of common artefacts such as ultra-high signal regions. Such regions can confound peak calling, fragment length estimation and QC metrics.
+
+SSD is a measure of inequality of signal with higher scores reflecting significant pile-up of reads along genome. SSD can therefore be used to assess both the extent of ultra high signals and the signal following removal of these blacklisted regions.
+
+For a note on known Blacklisted regions and on associated resources.
+* [Blacklisted Regions](http://mrccsc.github.io/analysisbeginings.html#/36)
+
+For a note on SSD
+* [SSD and Signal Pileup](http://mrccsc.github.io/analysisbeginings.html#/37).
+
+
+
+
+Quality Control - Standardised Standard Deviation.
+========================================================
+
+ChIPQC calculates SSD before after removing signal coming from Blacklisted regions.
+
+The plotSSD function plots samples's pre-blacklisting score in **red** and post-blacklisting score in **blue**.
+
+Higher scores for pre-blacklisted SSD can suggest a strong background signal in blacklisted regions for that sample.
+
+```{r}
+plotSSD(res)+xlim(0,14)
+```
+
+Quality Control - Standardised Standard Deviation.
+========================================================
+
+Since SSD score is strongly affected by blacklisting it may be necessary to change the axis to see any differences between samples for post-blacklisting scores.
+
+Higher post-blacklisted SSD scores reflect samples with stronger signal.
+
+```{r}
+plotSSD(res)+xlim(0.2,0.4)
+```
+
+Quality Control 
+========================================================
+
+For more details on assessing ChIP-seq quality you can visit the Bioconductor workshop we ran in Boston (Bioc 2014).
+
+* Practical - https://www.bioconductor.org/help/course-materials/2014/BioC2014/Bioc2014_ChIPQC_Practical.pdf
+* Practical Data - https://www.bioconductor.org/help/course-materials/2014/BioC2014/BCell_Examples.RData
+* Theory part - https://www.bioconductor.org/help/course-materials/2014/BioC2014/ChIPQC_Presentation.pdf
+
+Working with Peaks
+========================================================
+id: peakpushing
+
+Macs2 is a frequently used peak caller and works well to identify both punctate and broad peaks.
+
+For more details on peak calling steps for data in this course you can visit our material.
+
+For more details on MACS2, see the github page for MACS2 software
+* [MACS2 github page](https://github.com/taoliu/MACS).
+
+Working with Peaks
+========================================================
+MACS peak calls can be found in the user specied output directory with the suffix and extension "_peaks.xls".
+
+MACS peaks come as a tab seperated file thinly disguised as a ".xls".
+
+```{r,eval=T,echo=F,  warning=FALSE,collapse=T}
+macsPeaksFiles <- dir("MacsPeaks/", full.names=T)
+macsPeaks_DF <- read.delim(macsPeaksFiles[1],sep="",comment="#")
+knitr:::kable(macsPeaks_DF[1:3,])
+```
+
+Working with Peaks
+========================================================
+
+In addition to the genomic coordinates of peaks, these files contain useful information on the samples, parameters and version used for peak calling at the top.
+
+```{r,eval=T,echo=F,  warning=FALSE,collapse=T}
+macsPeaks_DF <- read.delim(macsPeaksFiles[1],comment="",stringsAsFactors = F)
+macsPeaks_DF[1:6,]
+```
+
+
+Working with Peaks - Importing peaks
+========================================================
+
+We can import peak files therefore using read.delim function. Note we have set *comment.char* argument to **#** to exclude additional information on peak calling parameters stored within the MACS peak file.
+
+```{r,eval=T,echo=T, eval=T, echo=T, warning=FALSE}
+peakfile <- "MacsPeaks/mycch12rep1_peaks.xls"
+macsPeaks_DF <- read.delim(peakfile,comment.char="#")
+macsPeaks_DF[1:2,]
+```
+
+Working with Peaks - Importing peaks
+========================================================
+
+Now we have the information in a table we can create a GRanges object.
+
+GRanges objects are made of chromosome names and intervals stored as IRanges.
+[link]
+
+```{r,eval=T,echo=T, eval=T, echo=T, warning=FALSE}
+library(GenomicRanges)
+macsPeaks_GR <- GRanges(
+ seqnames=macsPeaks_DF[,"chr"],
+ IRanges(macsPeaks_DF[,"start"],
+         macsPeaks_DF[,"end"]
+ )
+)
+macsPeaks_GR
+```
+
+Working with Peaks - Peaks as GRanges
+========================================================
+
+As we have seen before [link] elements in GRanges can accessed and set using various GRanges functions.
+Here we can deconstruct our object back to contig names and interval ranges.
+
+```{r,eval=T,echo=T, eval=T, echo=T, warning=FALSE}
+seqnames(macsPeaks_GR)
+ranges(macsPeaks_GR)
+```
+
+Working with Peaks - Peaks as GRanges
+========================================================
+
+GRanges objects may have metadata attached. Here we attach some useful information on our peaks including the summit position and the fold enrichment over input.
+
+```{r,eval=T,echo=T, eval=T, echo=T, warning=FALSE}
+mcols(macsPeaks_GR) <- macsPeaks_DF[,c("abs_summit", "fold_enrichment")]
+macsPeaks_GR
+```
+
+
+Working with Peaks - GRanges manipulation.
+========================================================
+
+GRanges objects can be rows subset as vectors or data.frames/matrices using an index.
+
+In this example, the first 3 genomic intervals are retrieved.
+
+```{r,eval=T,echo=T, eval=T, echo=T, warning=FALSE}
+macsPeaks_GR[1:3]
+# or macsPeaks_GR[1:3,]
+```
+
+Working with Peaks - GRanges manipulation.
+========================================================
+
+GRanges objects can also be rows subset as vectors or data.frames/matrices using logical vectors.
+
+Here we can retrieve all peaks on chromosome 1.
+
+```{r,eval=T,echo=T, eval=T, echo=T, warning=FALSE}
+macsPeaks_GR[seqnames(macsPeaks_GR) %in% "1"]
+```
+
+Working with Peaks - GRanges naming and indexing
+========================================================
+
+GRanges objects may have names attached to each genomic interval as seen with vector elements.
+
+This name may also be used to retrieve an interval of interest.
+
+```{r,eval=T,echo=T, eval=T, echo=T, warning=FALSE}
+names(macsPeaks_GR) <- macsPeaks_DF[,"name"]
+macsPeaks_GR["mycch12rep1_peak_33496"]
+```
+
+
+```{r,echo=F}
+library(ChIPQC)
+library(DESeq2)
+```
+
+
+
+Working with peaks - Read in peaksets in one step.
+========================================================
+
+There are many helper functions for reading in peak sets.
+
+The **rtracklayer** package has many tools for importing common file formats with the *import.bed* function being useful for peak sets in bed formats.
+
+Since MACS has a slightly different format to BED or BED6 we can use a **ChIPQC** function *GetGRanges* to read here.
+
+```{r,eval=T,echo=T, eval=T, echo=T, warning=FALSE}
+peakfile <- "MacsPeaks/mycch12rep1_peaks.xls"
+singlePeakSet <- ChIPQC:::GetGRanges(peakfile, sep="\t", simple=F)
+singlePeakSet[1:2,]
+```
+
+
+Manipulating Peak Sets - Finding Common peaks
+=========================================================
+
+Now we have our data in peak format we can start to do some simple but powerful analysis.
+
+First lets read in the two replicate Myc ChIP replicates for Ch12 cell.
+
+```{r commonpeaks_1, eval=T, echo=T, warning=FALSE}
+macsPeaksFiles <- dir("MacsPeaks/", full.names=T)
+firstPeakSet <- ChIPQC:::GetGRanges("MacsPeaks//mycch12rep1_peaks.xls", sep="\t", simple=F)
+secondPeakSet <- ChIPQC:::GetGRanges("MacsPeaks//mycch12rep2_peaks.xls", sep="\t", simple=F)
+```
+Manipulating Peak Sets - Finding Common peaks
+=========================================================
+
+We have learnt how to identify overlapping intervals in the Bioconductor tutorial using the [%over%](?%over%) command.
+
+Here we can apply this to identifying peaks in both replicates.
+
+```{r commonpeaks_2, eval=T, echo=T, warning=FALSE}
+OnlyfirstPeakSet <- firstPeakSet[!firstPeakSet %over% secondPeakSet]
+firstANDsecondPeakSets <- firstPeakSet[firstPeakSet %over% secondPeakSet]
+length(OnlyfirstPeakSet)
+length(firstANDsecondPeakSets)
+```
+
+Manipulating Peak Sets - Finding Common peaks
+=========================================================
+
+Now can plot the distribution of peaks' signal over input for those common to both replicates and those unique to replicate 1.
+
+Here it is clear that the peaks with the highest fold enrichment are common to both replicates.
+
+```{r boxplotOfFE, eval=T, echo=T, fig.height=5, fig.width=9, warning=FALSE}
+FirstOnly_FE <- log2(OnlyfirstPeakSet$fold_enrichment)
+FirstAndSecond_FE <- log2(firstANDsecondPeakSets$fold_enrichment)
+
+boxplot(FirstOnly_FE,
+        FirstAndSecond_FE,
+        names=c("Only_in_First","Common_to_first_second"),
+        ylab="log2 Fold_Enrichment")
+```
+
+Manipulating Peak Sets - Finding Common peaks
+=========================================================
+
+When looking at peaks which occur in both samples it is clear that the number of peaks in first replicate overlappng those in second is different from number of second replicate peaks overlapping first.
+
+This is because 2 peaks from one replicate may overlap 1 peak in the other replicate.
+
+```{r,eval=T,echo=T, eval=T, echo=T, warning=FALSE}
+firstANDsecondPeakSets <- firstPeakSet[firstPeakSet %over% secondPeakSet]
+secondANDfirstPeakSets <- secondPeakSet[secondPeakSet %over% firstPeakSet]
+
+length(firstANDsecondPeakSets)
+length(secondANDfirstPeakSets)
+```
+
+=========================================================
+![alt text](imgs/oneToMany.png)
+
+Manipulating Peak Sets - Finding Common peaks
+=========================================================
+
+A common step with finding overlapping transcription factor peaks is to reduce peaksets to single non-overlapping peakset before interrogating whether a peak occured in a sample.
+
+This allows for a single peak set to be used as a consensus peakset between replicates.
+
+
+```{r,eval=T,echo=T, eval=T, echo=T, warning=FALSE}
+allPeaks <- c(firstPeakSet,secondPeakSet)
+allPeaksReduced <- reduce(allPeaks)
+length(allPeaks)
+length(allPeaksReduced)
+```
+
+=========================================================
+![alt text](imgs/mel_Flattened.png)
+
+
+=========================================================
+id: makingcommonpeaks
+
+Now we can use a logical expression to subset our reduced/flattened peak set to those overlapping peaks in both the first and second replicate.
+
+```{r,eval=T,echo=T, eval=T, echo=T, warning=FALSE}
+commonPeaks <- allPeaksReduced[allPeaksReduced %over% firstPeakSet 
+                               & allPeaksReduced %over% secondPeakSet]
+length(commonPeaks)
+```
+
+=========================================================
+![alt text](imgs/Ch12_highcon.png)
+
+Practical 1
+=========================================================
+
+
+Working with complex overlaps
+=========================================================
+
+When working with a larger number of transcription factor marks it can be useful to establish a common flattened peak set for all marks and to score overlap for each peak set to flattened peaks.
+
+So, first lets read in the data and flatten all peaksets into one set.
+
+```{r, echo=TRUE,collapse=F}
+listOfPeaks <- GRangesList(lapply(macsPeaksFiles,
+                                  function(x)ChIPQC:::GetGRanges(x,sep="\t",simplify=T)
+                                  )
+                           )
+flattenedPeaks <- reduce(unlist(listOfPeaks))
+```
+
+=========================================================
+![alt text](imgs/flattened.png)
+
+The next step would be to identify when samples shared peaks
+========================================================
+```{r, echo=TRUE}
+matOfOverlaps <- sapply(listOfPeaks,function(x)
+                          as.integer(flattenedPeaks %over% x)
+                        )
+
+colnames(matOfOverlaps) <- basename(gsub("_peaks\\.xls","",macsPeaksFiles))
+
+
+mcols(flattenedPeaks) <- matOfOverlaps
+
+flattenedPeaks[1:2,]
+```
+
+========================================================
+We can get a quick idea about where overlaps occur using vennCounts
+
+```{r, echo=TRUE}
+limma:::vennCounts(as.data.frame(elementMetadata(flattenedPeaks)))
+```
+
+
+========================================================
+Or we can view as VennDiagram
+
+```{r, echo=T,fig.width=10, fig.height=5}
+limma:::vennDiagram(as.data.frame(elementMetadata(flattenedPeaks)))
+```
+
+We can check the Venn to see our numbers add up
+
+========================================================
+Now we can identify common peaks
+
+```{r, echo=TRUE}
+
+mych12Peaks <- flattenedPeaks[elementMetadata(flattenedPeaks)$mycch12rep1 + elementMetadata(flattenedPeaks)$mycch12rep2 == 2]
+mycMelPeaks <- flattenedPeaks[elementMetadata(flattenedPeaks)$mycmelrep1 +  elementMetadata(flattenedPeaks)$mycmelrep2 == 2]
+
+mych12Peaks[1:3,]
+```
+
+========================================================
+![alt text](imgs/highCon.png)
+
+
+========================================================
+And some unique peaks 
+```{r, echo=TRUE}
+
+mycMelPeaks_Only <- flattenedPeaks[elementMetadata(flattenedPeaks)$mycmelrep1 + elementMetadata(flattenedPeaks)$mycmelrep2 == 2 &
+elementMetadata(flattenedPeaks)$mycch12rep1 + 
+                 elementMetadata(flattenedPeaks)$mycch12rep2 == 0]
+
+mycMelPeaks_Only[1,]
+```
+
+========================================================
+![alt text](imgs/Mel_Only.png)
+
+
+
+
+
+Functional Annotation of peaks
+=========================================================
+id: functional
+
+So far we have been working with ChIP-seq peaks corresponding to transcription factor binding. Transcription factors, as implied in the name, can affect the expression of their target genes.
+
+The target of transcription factor is hard to assertain from ChIP-seq data alone and so often we will annotate peaks to genes by a simple set of rules:-
+
+Peaks are typically annotated to a gene if
+* They overlap the gene.
+* The gene is the closest (and within a minimum distance.)
+
+
+
+
+Peak annotation
+=========================================================
+
+A useful package for annotation of peaks to genes is **ChIPseeker**. 
+
+By using pre-defined annotation in the from of a **TXDB** object for mouse (mm9 genome), ChIPseeker will provide us with an overview of where peaks land in the gene and distance to TSS sites.
+
+First load the libraries we require for the next part.
+
+
+```{r,eval=T,echo=T, eval=T, echo=T, warning=FALSE,tidy=T}
+library(TxDb.Mmusculus.UCSC.mm9.knownGene)
+library(org.Mm.eg.db)
+library(GenomeInfoDb)
+library(ChIPseeker)
+
+```
+
+Peak annotation
+=========================================================
+
+We use **GenomeInfoDb** package to fix chromosome naming style. We know we are using UCSC annotation (TxDb.Mmusculus.UCSC.mm9.knownGene) so we can style our previously defined [commonPeaks](#/makingcommonpeaks) to "UCSC" standard using the *seqlevelsStyle* function.
+
+```{r,eval=T,echo=T, eval=T, echo=T, warning=FALSE,tidy=T}
+commonPeaks[1:2,]
+seqlevelsStyle(commonPeaks) <- "UCSC"
+commonPeaks[1:2,]
+```
+
+Peak annotation
+=========================================================
+
+The annotatePeak function accepts a GRanges object of the regions to annotate, a TXDB object for gene locations and a database object name to retrieve gene names from.
+
+
+```{r,eval=T,echo=T, message=F,messages=F, eval=T, echo=T, warning=FALSE,tidy=T}
+peakAnno <- annotatePeak(commonPeaks, tssRegion=c(-1000, 1000), 
+                         TxDb=TxDb.Mmusculus.UCSC.mm9.knownGene, annoDb="org.Mm.eg.db")
+```
+
+Peak annotation
+=========================================================
+
+The result is a csAnno object containing annotation for peaks and overall annotation statistics.
+
+```{r,eval=T,echo=T, message=F,messages=F, eval=T, echo=T, warning=FALSE,tidy=T}
+class(peakAnno)
+peakAnno
+```
+
+
+Peak annotation
+=========================================================
+
+The csAnno object contains the information on annotation of individual peaks to genes.
+
+To extract this from the csAnno object the ChIPseeker functions *as.GRanges* or *as.data.frame* can be used to produce the respective object with peaks and their associated genes.
+
+```{r,eval=T,echo=T, eval=T, echo=T, warning=FALSE,tidy=T}
+peakAnno_GR <- as.GRanges(peakAnno)
+peakAnno_GR[1:3,]
+```
+
+
+
+Visualising peak annotation
+=========================================================
+Now we have the annotated peaks from ChIPseeker we can use some of ChIPseeker's plotting functions to display distribution of peaks in gene features.
+
+
+```{r,eval=T,echo=T, eval=T, echo=T, warning=FALSE,tidy=T}
+plotAnnoBar(peakAnno)
+plotAnnoPie(peakAnno)
+```
+
+Visualising peak annotation
+=========================================================
+Similarly we can plot the distribution of peaks around TSS sites.
+
+
+```{r,eval=T,echo=T, eval=T, echo=T, warning=FALSE,tidy=T}
+plotDistToTSS(peakAnno)
+```
+
+Visualising peak annotation
+=========================================================
+ChIPseeker can also offer a succinct plot to describe the overlap between annotations.
+
+
+```{r, eval=T, echo=T, fig.height=20, fig.width=20, warning=FALSE, tidy=T}
+upsetplot(peakAnno, vennpie=F)
+```
+
+
+Gene Ontology and geneset testing.
+=========================================================
+id:gsa
+
+Transcription factors or epigenetic marks may act on specific sets of genes grouped by a common biological feature (shared Biological function, common regulation in RNAseq experiment etc).
+
+A frequent step in ChIP-seq analysis is to test whether common gene sets are enriched for transcription factor binding or epigenetic marks.
+
+Source of well curated genesets include GO consortium (Gene function, process and cellular localisation), REACTOME (Biological Pathways) and MsigDB (Computationally and Experimentally derived).
+
+Geneset enrichment testing may be performed on the sets of genes with peaks associated to them. In this example we will consider genes with peaks within 1000bp of a gene's TSS. 
+
+[link to RNA-seq GOseq]()
+
+Gene ontology and geneset testing.
+=========================================================
+
+To geneset testing here, we will use the GOseq package and so must provide a named numeric vector of 1s or 0s to illustrate whether a gene had any peaks overlapping it's TSS.
+
+In this example we use all TSS sites we found to be overlapped by our common peaks we [previously defined](#/makingcommonpeaks). So first lets find all genes overlapping TSS regions.
+
+The peaks landing in TSS regions will be marked as "Promoter" in the **annotation** column of our annotated GRanges object. We can extract the unique names of genes with peaks in their TSS by subsetting the annotated GRanges and retrieving gene names from the **geneId** column.
+
+```{r,eval=T,echo=T, eval=T, echo=T, warning=FALSE,tidy=T}
+genesWithPeakInTSS <- unique(peakAnno_GR[peakAnno_GR$annotation == "Promoter",]$geneId)
+
+genesWithPeakInTSS[1:2]
+```
+
+Gene ontology and functional testing.
+=========================================================
+
+Next we can extract all genes which are included in the TxDb object to use as our universe of genes for pathway enrichment.
+
+
+```{r,eval=T,echo=T, eval=T, echo=T, warning=FALSE,tidy=T}
+allGenes <- unique(
+  unlist(
+    keys(TxDb.Mmusculus.UCSC.mm9.knownGene, "GENEID")
+    )
+  )
+
+length(allGenes)
+```
+
+Gene ontology and functional testing.
+=========================================================
+
+Once we have a vector of all genes we can create a named vector of 1s or 0s representing whether a gene had peak in TSS or not.
+
+```{r,eval=T,echo=T, eval=T, echo=T, warning=FALSE,tidy=T}
+allGenesForGOseq <- as.integer(allGenes %in% genesWithPeakInTSS)
+names(allGenesForGOseq) <- allGenes
+allGenesForGOseq[1:3]
+```
+
+
+
+Gene ontology and functional testing.
+=========================================================
+
+A little helper function you may recognise to add some useful KEGG names alongside the KEGG pathway IDs in GOseq results.
+
+```{r}
+library(KEGG.db)
+library(goseq)
+xx <- as.list(KEGGPATHID2NAME)
+temp <- cbind(names(xx),unlist(xx))
+addKeggTogoseq <- function(JX,temp){
+  for(l in 1:nrow(JX)){
+    if(JX[l,1] %in% temp[,1]){
+      JX[l,"term"] <- temp[temp[,1] %in% JX[l,1],2]
+      JX[l,"ontology"] <- "KEGG"
+    }
+    
+  }
+  return(JX)
+}
+```
+
+Gene ontology and functional testing.
+=========================================================
+
+Now we have the the input for GOseq we can test against KEGG (or GO if we choose) using a standard fisher test.
+
+```{r,eval=T,echo=T, eval=T, echo=T, warning=FALSE,tidy=T}
+library(goseq)
+
+pwf=nullp(allGenesForGOseq,"mm9","knownGene",plot.fit=FALSE)
+
+Kegg_MycPeaks <- goseq(pwf,"mm9","knownGene",test.cats=c("KEGG"),method="Hypergeometric")
+
+Kegg_MycPeaks <- addKeggTogoseq(Kegg_MycPeaks,temp)
+
+Kegg_MycPeaks[1:4,]
+
+```
+
+
+Gene ontology and functional testing. GREAT method.
+=========================================================
+
+In addition to a standard enrichment test, methods have been implemented specifically for ChIP-seq.
+
+GREAT defines regulatory regions for each gene and compares the proportion of peaks mapping to a geneset's regulatory regions to the proportion of the genome occupied by geneset's regulatory regions.
+
+i.e. If a gene set's regulatory regions account for 1% of the genome then one might expect 1% of peaks to overlap these regions by chance.
+
+We can use the GREAT Bioconductor interface available in the rGREAT package. Since GREAT uses UCSC annotation lets make sure our peaks our in UCSC style.
+
+```{r,eval=T,echo=T, eval=T, echo=T, warning=FALSE,tidy=T}
+library(rGREAT)
+seqlevelsStyle(commonPeaks) <- "UCSC"
+```
+
+Gene ontology and functional testing. GREAT method.
+=========================================================
+
+To submit jobs we can use our GRanges of commonPeaks and specify a genome with the **submitGreatJob** function.
+
+This function returns a GreatJob object containing a reference to our results on the GREAT server. To review the categories of results available we can use the availableCategories function on our GreatJob object.
+
+```{r,eval=T,echo=T, eval=T, echo=T, warning=FALSE,tidy=T}
+great_Job <- submitGreatJob(commonPeaks,species="mm9")
+availableCategories(great_Job)
+```
+
+Gene ontology and functional testing. GREAT method.
+=========================================================
+
+The results table can be retrieved using the getEnrichmentTables function and specify which tables we wish to review.
+
+Here we retrieve the results tables for the "Pathway Data" genesets which contains 3 seperate database results.
+
+```{r,eval=T,echo=T, eval=T, echo=T, warning=FALSE,tidy=T}
+great_ResultTable = getEnrichmentTables(great_Job,category=
+                          "Pathway Data")
+names(great_ResultTable)
+great_ResultTable[[2]][1:3,]
+
+```
+
+Practical 2
+===========================================================
+
+
+Identifying Motifs
+==========================================================
+id: motifs
+
+A common practice in transcription factor ChIP-seq is to investigate the motifs enriched under peaks. 
+
+Denovo motif enrichment can be performed in R/Bioconductor but this can be very time consuming. Here we will use the Meme-ChIP suite available online to identify denovo motifs.
+
+Meme-ChIP requires a fasta file of sequences under peaks as input so we extract this using the **Biostrings** library.
+
+Extracting sequences under regions
+============================
+
+First we need to load the BSgenome object for the genome we are working on, UCSC's mm9 build for the mouse genome. Again we ensure that the chromosome names and style for our common peaks [defined earlier](#/makingcommonpeaks) matches that seen in UCSC.
+
+```{r, echo=TRUE,collapse=F}
+
+library(BSgenome)
+library(BSgenome.Mmusculus.UCSC.mm9)
+genome <- BSgenome.Mmusculus.UCSC.mm9
+seqlevelsStyle(commonPeaks) <- "UCSC"
+```
+
+Extracting sequences under regions
+============================
+
+The motif for the ChIP-ed transcription factor should in the centre of a peak. Meme-ChIP will trim our peaks to a common length internally if sequences are of different length.
+
+It is best therefore to provide a peak set resized to a common length.
+
+```{r, echo=TRUE,collapse=F}
+commonPeaks <- resize(commonPeaks,300,fix="center")
+commonPeaks[1:4,]
+```
+
+Extracting sequences under regions
+============================
+
+Once we have recentered our peaks we can use the **getSeq** with the  function with our GRanges of resized common peaks and the BSgenome object for mm9.
+
+The **getSeq** function returns a *DNAStringSet* object containing sequences under peaks. 
+
+Here we provide names to the elements of the DNAStringSet as we did for GRanges objects earlier.
+
+```{r, echo=TRUE,collapse=F}
+commonPeaksSequences <- getSeq(genome,GRanges(commonPeaks))
+names(commonPeaksSequences) <- paste0("peak_",seqnames(commonPeaks),"_",
+                                         start(commonPeaks),
+                                         "-",
+                                         end(commonPeaks))
+
+commonPeaks[1:2,]
+```
+
+Writing to FASTA file
+============================
+
+The *writeXStringSet* function allows the user to write DNA/RNA/AA(aminoacid)StringSet objects out to file. 
+
+By default the *writeXStringSet* function writes the sequence information in FASTA format (as required for Meme-ChIP).
+
+```{r, echo=TRUE,collapse=F}
+writeXStringSet(commonPeaksSequences,file="consensusPeaks.fa")
+
+```
+
+Now the file "consensusPeaks.fa" contains sequences around the geometric centre of peaks suitable for Motif analysis in Meme-ChIP. 
+
+In your own work you will typically run this from a big machine (such as a cluster) with Meme installed locally but today we will upload our generated fasta file to their [web portal](http://meme-suite.org/tools/meme-chip). 
+
+A pre-compiled results files can be found here
+
+
+Getting hold of Data
+========================================================
+id: external
+
+Often external datasets for ChIP-seq would be useful to integrate with your own analysis.
+
+AnnotationHub provides a nice interactive interface to retrieve data from a range of repositories covering epigenetic or expression data into R.
+
+Try the code below for yourself.
+
+```{r,eval=F,echo=T,cache=T}
+library(AnnotationHub)
+ah = AnnotationHub()
+rowResults <- display(ah)
+```
+
+Getting hold of Data
+========================================================
+
+AnnotationHub may also be used in non-interactive modes.
+
+To search AnnotationHub by keywords we can use the *query* function on the AnnotationHub object. This provides information on how to retrieve data too.
+```{r,eval=F,echo=T,cache=T}
+query(ah, c("GTF", "77","Ensembl", "Homo sapiens"))
+cmycAnnoHub <- ah[["AH28051"]]
+cmycAnnoHub[1:3,]
+```
+ 
+Exporting tracks for Visualisation
+==========================================================
+id: vis
+
+Having produced our consensus sets or GRanges of any description it is useful to visualise this in a genome browser. 
+
+One fast, locally installed browser is the Broad's Integrative Genome Browser (IGV).
+IGV is available from ? and our quick course in IGV is available from ?.
+
+To export GRanges from R into a ".bed" format acceptable to IGV (or other browser types) we can use the export.bed function from rtracklayer.
+
+```{r,eval=F,echo=T,cache=T}
+library(rtracklayer)
+export.bed(commonPeaks,con = "consensusPeaksForIGV.bed")
+
+```
+
+
+Simple Differential binding
+========================================================
+id: diffchip
+
+Analysis of the differences in ChIP-seq data can often benefit from a more quantitative analysis. Many tools used in RNA-seq analysis studies can be applied to ChIP data including favorites such as DEseq2 and EdgeR.
+
+Inorder to assess difference we first needed identify peaks common within groups. Here we take our previously prepared set made of flattened peaks and identify those reproducible peaks in either group.
+
+
+```{r, echo=TRUE}
+
+highConfidence_Only <- flattenedPeaks[elementMetadata(flattenedPeaks)$mycmelrep1 +                  elementMetadata(flattenedPeaks)$mycmelrep2 == 2 |
+elementMetadata(flattenedPeaks)$mycch12rep1 + 
+                 elementMetadata(flattenedPeaks)$mycch12rep2 == 2]
+
+```
+
+========================================================
+![alt text](imgs/forDB.png)
+
+Simple Differential binding
+========================================================
+Now we can look to see if we need resizing.
+```{r, echo=TRUE}
+boxplot(width(highConfidence_Only))
+abline(h=400,col="red")
+```
+The majority of peaks are around 400 so we will resize all peaks to this for ease here
+
+Simple Differential binding
+========================================================
+Now we can resize to a sensible size
+```{r, echo=TRUE}
+PeaksToCount <- resize(highConfidence_Only,width = 400,fix = "center")
+PeaksToCount[1:2,]
+```
+
+Simple Differential binding
+========================================================
+
+Once we have our peakset we can can count the reads mapping to peaks from all samples.
+Many options are available for counting including Rsubread package's FeatureCounts method and GenomicAlignments' summarizeOverlaps function.
+
+For a more detailed description of counting, please take a look at some of our previous material.
+
+For now, we can import the counts produced on this course into our present R session.
+
+```{r, echo=TRUE}
+load("robjects/MycCounts.Rdata")
+countTable[1:3,]
+```
+
+Simple Differential binding - A simple DEseq2 DE analysis
+========================================================
+Here we set up a DEseq2 object much as you would for RNAseq.
+
+We define the conditions in **colData** as CellLines for Mel and ch12 as in RNAseq and provide a table of the counts in peak.
+
+In contrast to the RNAseq DEseq2 setup we will provide additional information of the GRanges for peaks to the rowRanges argument.
+
+```{r, echo=TRUE}
+library("DESeq2")
+
+colData <- data.frame(SampleName=colnames(countTable[,-c(3,6)]),
+                      CellLine=c("ch12","ch12","mel","mel"))
+
+dds <- DESeqDataSetFromMatrix(countData = countTable[,-c(3,6)],
+                              colData = colData,
+                              design = ~ CellLine,
+                              rowRanges=PeaksToCount)
+
+dds <- DESeq(dds)
+```
+
+Simple Differential binding - A simple DEseq2 DE analysis
+========================================================
+
+Now we have our dds object with rowRanges we can extract the results for differences between celllines as seen for RNA-seq.
+
+In contrast to RNA-seq, we specify the "GRanges" format in our call to *results* function.
+
+Finally we subset our GRanges to produce a GRanges of peaks with significantly higher signal in Mel cell line.
+
+```{r, echo=TRUE}
+
+test_cellline <- results(dds, contrast=c("CellLine","ch12","mel"),
+                         format="GRanges")
+
+UpinMel <- test_cellline[test_cellline$padj < 0.05 & !is.na(test_cellline$padj) 
+                         & test_cellline$log2FoldChange > 0]
+
+UpinMel
+```
+
+THE END!
+=========================================================
+
+
+Annotating peaks
+=========================================================
+
+A simple method to annotating peaks is to overlap peaks with known genes' TSS regions.
+We can do this in a similar manner as we did for finding common peaks.
+
+First we need to define TSS regions. Here we will import gene locations from a text file and create a GRanges object.
+
+```{r,eval=T,echo=T, eval=T, echo=T, warning=FALSE}
+mm9Genes <- read.delim("robjects/mm9Genes_May2012.txt")
+mm9GeneRanges <- GRanges(seqnames=paste0("chr",mm9Genes[,3]),
+                         ranges=IRanges(start=mm9Genes[,1],
+                                        end=mm9Genes[,2]),
+                                        strand=mm9Genes[,4],
+                                        name=mm9Genes[,5],
+                                      biotype=mm9Genes[,6])
+
+JustChrOfInterest <- unique(as.vector(seqnames(mm9GeneRanges)))[grep("\\d.|\\d|X|Y|MT",unique(as.vector(seqnames(mm9GeneRanges))))]
+
+mm9PC <- mm9GeneRanges[mm9GeneRanges$biotype == "protein_coding"]
+mm9PC <- mm9PC[order(width(mm9PC),decreasing=T)]
+mm9PC <- mm9PC[match(unique(mm9PC$name),mm9PC$name)]
+mm9PC <- mm9PC[!mm9PC$name == ""]
+mm9PC <- mm9PC[seqnames(mm9PC) %in% JustChrOfInterest]
+mm9PC[1:3]
+
+```
+
+Annotating peaks
+=========================================================
+
+As we saw previously, GenomicRanges package offers many tools to manipulate GRanges objects including tools specifically developed for working with genes. 
+
+Here we use the promoters function to define mm9 gene promoters from our gene coordinates in one line. After this we will need to fix the names of chromosomes to make the  genes GRanges object compatable with our peak GRanges object.
+
+```{r,eval=T,echo=T, eval=T, echo=T, warning=FALSE}
+mm9Promoters <- promoters(mm9PC,1000,1000)
+mm9PC[1:2,]
+mm9Promoters[1:2,]
+mm9Promoters <- renameSeqlevels(mm9Promoters,gsub("chr","",seqlevels(mm9Promoters)))
+mm9Promoters[1:2,]
+
+```
+
+Annotating peaks
+=========================================================
+
+Now we can extract the genes which overlap our consensus peaks for use downstream.
+
+"mm9Promoters %over% consensusPeaks" provides a logical index of whether a promoter is overlapped by a consensus peak.
+
+This logical vector can be used to subset our GRanges to those promoters overlapping peaks.
+
+```{r,eval=T,echo=T, eval=T, echo=T, warning=FALSE}
+consensusPeaks <- mySets[[2]]
+consensusPeaks <- renameSeqlevels(consensusPeaks,gsub("chr","",seqlevels(consensusPeaks)))
+
+mm9GenesWithPromoterPeaks <- mm9Promoters[mm9Promoters %over% consensusPeaks]$name
+length(mm9GenesWithPromoterPeaks)
+```
+
+Annotating peaks
+=========================================================
+
+So far we have annotated our peaks in a simple fashion. Although we have full control here, many packages offer a quicker solution to annotating peak regions.
+
+One very popular package is ChIPpeakAnno written by Julie Zu. This provides many methods for annotating to genes, functional testing against gene sets and assessing relationships between peaksets. 
+
+The annotatePeakInBatch function annotates peaks to overlapping as well as proximal genes and reports distances to genes.
+For full details on annotating peaks have a look at the help associated with ?annotatePeakInBatch.
+
+
+```{r,eval=T,echo=T, eval=T, echo=T, warning=FALSE,tidy=T}
+library(ChIPpeakAnno)
+data(TSS.mouse.NCBIM37)
+
+annotatedConsensusPeaks <- annotatePeakInBatch(consensusPeaks, AnnotationData=TSS.mouse.NCBIM37,output="both")
+
+annotatedConsensusPeaks[1,]
+```
+
+Annotating peaks
+=========================================================
+
+We can also use annotatePeakInBatch with our own annotation data in the form of a GRanges object as the "AnnotationData" argument.
+
+
+```{r,eval=T,echo=T, eval=T, echo=T, warning=FALSE,tidy=T}
+names(mm9Promoters) <- mm9Promoters$name
+
+annotatedConsensusPeaks <- annotatePeakInBatch(consensusPeaks, AnnotationData=mm9Promoters,output="both")
+
+mm9GenesWithPromoterPeaks_2 <- annotatedConsensusPeaks[annotatedConsensusPeaks$fromOverlappingOrNearest == "Overlapping",]$feature
+
+
+```
+
+Maybe show how to add gene names of use?
+addGeneIDs(annotatedPeak[1:6], orgAnn="org.Hs.eg.db", IDs2Add=c("symbol"))
+
+
+
+Gene ontology and functional testing.
+=========================================================
+
+Functional enrichment testing can simply be performed on the sets of genes with peaks overlappng their TSS as with RNA-seq differentially expressed genes.
+
+To perform functional enrichment testing like this we will use the GOseq package and provide a named numeric vector of 1s or 0s to illustrate whether a gene had any peaks overlapping it's TSS.
+
+In this example we use all TSS sites we found to be overlapped by our consensus peaks from section ?.
+
+```{r,eval=T,echo=T, eval=T, echo=T, warning=FALSE,tidy=T}
+consensusPeaks <- mySets[[2]]
+genePeakedVector <- mm9Promoters %over% consensusPeaks + 0
+names(genePeakedVector) <- names(mm9Promoters)
+table(genePeakedVector)
+```
+
+Gene ontology and functional testing.
+=========================================================
+
+Functional enrichment testing can simply be performed on the sets of genes with peaks overlappng their TSS as with RNA-seq differentially expressed genes.
+
+To perform functional enrichment testing like this we will use the GOseq package and provide a named numeric vector of 1s or 0s to illustrate whether a gene had any peaks overlapping it's TSS.
+
+In this example we use all TSS sites we found to be overlapped by our consensus peaks from section ?.
+
+```{r,eval=T,echo=T, eval=T, echo=T, warning=FALSE,tidy=T}
+consensusPeaks <- mySets[[2]]
+genePeakedVector <- mm9Promoters %over% consensusPeaks + 0
+names(genePeakedVector) <- names(mm9Promoters)
+table(genePeakedVector)
+```
+
+Gene ontology and functional testing.
+=========================================================
+
+Now we have the the input for GOseq we can test against KEGG (or GO if we choose) using a standard fisher test.
+
+```{r,eval=T,echo=T, eval=T, echo=T, warning=FALSE,tidy=T}
+library(goseq)
+
+pwf=nullp(genePeakedVector,"mm9","geneSymbol")
+
+Kegg_MycPeaks <- goseq(pwf,"mm9","geneSymbol",test.cats=c("KEGG"),method="Hypergeometric")
+
+Kegg_MycPeaks <- addKeggTogoseq(Kegg_MycPeaks,temp)
+
+Kegg_MycPeaks[1:2,]
+
+```
+
+Lola and regionR
+==========================================================
+#Some examples using myc and know myc regulated genes from pol and RNA-seq we analysed ()
+
+Manipulating Peak Sets - Finding Common peaks
+=========================================================
+
+The soGGi package offers a quick alternative to defining overlapping peaksets in a single command.
+
+```{r,eval=T,echo=T, eval=T, echo=T, warning=FALSE}
+testList <- list(firstPeakSet,secondPeakSet)
+names(testList) <- c("First_Set","Second_Set")
+mySets <- soGGi:::groupByOverlaps(testList)
+mySets[2]
+```
+
+
+##
+With the introduction of multiplexing technologies and an increase in epigenetic datasets available from public repositories and consortiums, an increasingly sophisticated and high throughput set of bioinformatics tools and methods have been developed.

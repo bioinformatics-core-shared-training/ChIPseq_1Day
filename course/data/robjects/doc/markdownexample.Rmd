@@ -1,0 +1,62 @@
+---
+title: "Integration with Rmarkdown"
+output:
+  html_document:
+    keep_md: yes
+    self_contained: no
+    smart: no
+---
+<!--
+%\VignetteEngine{knitr::rmarkdown}
+%\VignetteIndexEntry{Supplementary Materials}
+-->
+
+
+This is an example of integrating a Tracktables report into a RMarkdown document.
+
+
+
+```{r dataInt}
+library(tracktables)
+options(markdown.HTML.header = system.file("misc", "datatables.html", package = "knitr"))
+oldFileLocations <- system.file("extdata",package="tracktables")
+
+dir.create(file.path(getwd(),"IGVDirectory"),
+           showWarnings = FALSE,recursive = TRUE)
+file.copy(oldFileLocations,
+          file.path(getwd(),"IGVDirectory"),
+          recursive = TRUE)
+fileLocations <- file.path(getwd(),"IGVDirectory","extdata")
+```
+
+Next the samplesheet of metadata and filesheet of locations is created.
+```{r dataIntw}
+
+bigwigs <- dir(fileLocations,pattern="*.bw",full.names=TRUE)
+intervals <- dir(fileLocations,pattern="*.bed",full.names=TRUE)
+bigWigMat <- cbind(gsub("_Example.bw","",basename(bigwigs)),
+                   bigwigs)
+intervalsMat <- cbind(gsub("_Peaks.bed","",basename(intervals)),
+                      intervals)
+
+FileSheet <- merge(bigWigMat,intervalsMat,all=TRUE)
+FileSheet <- as.matrix(cbind(FileSheet,NA))
+colnames(FileSheet) <- c("SampleName","bigwig","interval","bam")
+
+SampleSheet <- cbind(as.vector(FileSheet[,"SampleName"]),
+                     c("EBF","H3K4me3","H3K9ac","RNAPol2"),
+                     c("ProB","ProB","ProB","ProB"))
+colnames(SampleSheet) <- c("SampleName","Antibody","Species")
+```
+The tracktables report is created from a call to \texttt{maketracktable}. By default all paths are created relative the directory specified by \texttt{basedirectory}.
+
+```{r dataInts22,results='asis'}
+
+HTMLreport <- maketracktable(fileSheet=FileSheet,
+                               SampleSheet=SampleSheet,
+                               filename="IGVEx3.html",
+                               basedirectory=getwd(),
+                               genome="mm9")
+cat(HTMLreport)
+```
+

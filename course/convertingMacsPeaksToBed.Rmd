@@ -1,0 +1,62 @@
+---
+title: "exportingMACStoBED"
+author: "Tommy"
+date: "25 February 2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r cars}
+listOfPeaks <- GRangesList(lapply(macsPeaks,function(x)ChIPQC:::GetGRanges(x,sep="\t",simplify=T)))
+flattenedPeaks <- reduce(unlist(listOfPeaks))
+names(listOfPeaks) <- gsub("\\.xls","\\.bed",basename(macsPeaks))
+lapply(1:length(listOfPeaks),function(x)export.bed(listOfPeaks[[x]],con=names(listOfPeaks)[x]))
+flattenedPeaks <- reduce(unlist(listOfPeaks))
+export.bed(flattenedPeaks,con="flattenedPeaks.bed")
+
+matOfOverlaps <- sapply(listOfPeaks,function(x)
+(flattenedPeaks %over% x)+0
+)
+
+colnames(matOfOverlaps) <- basename(gsub("_peaks\\.xls","",macsPeaks))
+
+
+elementMetadata(flattenedPeaks) <- matOfOverlaps
+
+mych12Peaks <- flattenedPeaks[elementMetadata(flattenedPeaks)$mycch12rep1 + elementMetadata(flattenedPeaks)$mycch12rep2 == 2]
+mycMelPeaks <- flattenedPeaks[elementMetadata(flattenedPeaks)$mycmelrep1 +  elementMetadata(flattenedPeaks)$mycmelrep2 == 2]
+
+export.bed(mycMelPeaks,con="Mel_HighCon_flattenedPeaks.bed")
+export.bed(mych12Peaks,con="Ch12_HighCon_flattenedPeaks.bed")
+
+
+mycMelPeaks_Only <- flattenedPeaks[elementMetadata(flattenedPeaks)$mycmelrep1 + elementMetadata(flattenedPeaks)$mycmelrep2 == 2 &
+elementMetadata(flattenedPeaks)$mycch12rep1 + 
+                 elementMetadata(flattenedPeaks)$mycch12rep2 == 0]
+
+export.bed(mycMelPeaks_Only,con="Mel_Only_HighCon_flattenedPeaks.bed")
+
+
+mycMelorch12Peaks <- flattenedPeaks[elementMetadata(flattenedPeaks)$mycmelrep1 + elementMetadata(flattenedPeaks)$mycmelrep2 == 2 |
+elementMetadata(flattenedPeaks)$mycch12rep1 + 
+                 elementMetadata(flattenedPeaks)$mycch12rep2 == 2]
+
+export.bed(mycMelorch12Peaks,con="Mel_Or_Ch12_HighCon_flattenedPeaks.bed")
+
+firstPeakSet <- ChIPQC:::GetGRanges(macsPeaks[1], sep="\t", simple=F)
+secondPeakSet <- ChIPQC:::GetGRanges(macsPeaks[2], sep="\t", simple=F)
+
+allPeaks <- c(firstPeakSet,secondPeakSet)
+allPeaksReduced <- reduce(allPeaks)
+length(allPeaks)
+length(allPeaksReduced)
+
+export.bed(allPeaksReduced,con="Ch12_flattenedPeaks.bed")
+
+commonPeaks <- allPeaksReduced[allPeaksReduced %over% firstPeakSet & allPeaksReduced %over% secondPeakSet]
+export.bed(commonPeaks,con="Ch12_common_flattenedPeaks.bed")
+
+
