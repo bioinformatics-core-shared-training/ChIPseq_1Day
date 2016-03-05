@@ -1,0 +1,19 @@
+#sampleTable
+Linking_id	Antibody	Species
+EBF	EBF	ProB
+H3K4me3	H3K4me3	ProB
+H3K9ac	H3K9ac	ProB
+RNAPol2	RNAPol2	ProB
+
+#sampleMapping
+#Bams
+_Bam
+
+#BigWigs
+EBF_Bigwig	EBF
+H3K4me3_Bigwig	H3K4me3
+H3K9ac_Bigwig	H3K9ac
+RNAPol2_Bigwig	RNAPol2
+
+#Intervals
+EBF_Interval	EBF

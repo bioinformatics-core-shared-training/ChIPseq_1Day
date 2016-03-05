@@ -1,0 +1,11 @@
+<Global genome.value="mm9" groupTracksBy="Linking_id" locus="All" version="3">
+  <Resources>
+    <Resource name="SampleMetadata" path="SampleMetadata.txt" relativePath="TRUE"/>
+    <Resource label="H3K4me3_Bigwig" name="H3K4me3_Bigwig" path="IGVDirectory/extdata/H3K4me3_Example.bw" relativePath="TRUE"/>
+  </Resources>
+  <Panel height="350" name="DataPanel" width="1115">
+    <Track id="IGVDirectory/extdata/H3K4me3_Example.bw" name="H3K4me3_Bigwig" autoScale="true" altColor="169,169,169" color="169,169,169" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" renderer="BAR_CHART" showDataRange="true" visible="true" sortable="true" normalize="false" windowFunction="mean">
+      <DataRange baseline="0" drawBaseline="true" flipAxis="false" maximum="50" minimum="0" type="LINEAR"/>
+    </Track>
+  </Panel>
+</Global>
