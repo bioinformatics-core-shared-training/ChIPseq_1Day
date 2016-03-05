@@ -17,7 +17,7 @@ The course consists of 7 sections.
 
 Each section is presented as both HTMl and Rpres markdown ( to allow for intergration of the presentation in the RStudio enviroment itself).  Exercises and answer sheets are included after all subsections to practice techniques and provide future reference examples. 
 
-Course material and exercises are available to view as rendered HTML slides or single page HTML at [http://thomascarroll.github.io/short_ChIPseq/](http://thomascarroll.github.io/short_ChIPseq/).  
+Course material and exercises are available to view as rendered HTML slides or single page HTML at [http://mrccsc.github.io/ChIPseq_short/](http://mrccsc.github.io/ChIPseq_short).  
 All material is available to download under GPL v3 license.
 
 For  information on other courses run by our team see our [github IO page](http://mrccsc.github.io/training/).
@@ -64,9 +64,9 @@ biocLite("AnnotationHub")
 </pre>
 
 #### Download the material
-The material can either be downloaded as a [zip](https://github.com/ThomasCarroll/short_ChIPSeq/archive/master.zip)
+The material can either be downloaded as a [zip](https://github.com/mrccsc/ChIPseq_short/archive/master.zip)
 <pre>
-wget https://github.com/ThomasCarroll/short_ChIPSeq/archive/master.zip ./
+wget https://github.com/mrccsc/ChIPseq_short/archive/master.zip ./
 </pre>
 or checked out from our Github repository
-https://github.com/ThomasCarroll/short_ChIPSeq/
+https://github.com/mrccsc/ChIPseq_short/
