@@ -1,7 +1,7 @@
 ChIP-seq Intro 
 ========================================================
 author:MRC CSC Bioinformatics Core
-date:http://mrccsc.github.io/training.html
+date:http://mrccsc.github.io/ChIPseq_short/
 width: 1440
 height: 1100
 autosize: true
@@ -75,7 +75,7 @@ Story so far.
 ========================================================
 id: background
 
-In this course we will use some of the Encode data for Myc ChIP-seq in mouse aligned to the mm9 genome.
+In this course we will use some of the Encode data for Myc ChIP-seq in mouse aligned to the mm9 genome (GEO - GSM912934, GSM912906).
 
 This data is composed of Myc chip for two cell lines, Mel and Ch12 cell lines, each with two replicates.
 
@@ -88,10 +88,10 @@ Materials.
 id: materials
 
 All material for this course can be found on github.
-* [short_ChIPseq](https://github.com/ThomasCarroll/short_ChIPseq/)
+* [ChIPseq_short](https://github.com/mrccsc/ChIPseq_short)
 
 Or can be downloaded as a zip archive from here. 
-* [Download zip](https://github.com/ThomasCarroll/short_ChIPseq/archive/2f6bc2972c80bb53ad9c59305ceeab5a76d597cd.zip)
+* [Download zip](https://github.com/mrccsc/ChIPseq_short/archive/master.zip)
 
 Materials. - Presentations, source code and practicals.
 ========================================================
@@ -110,10 +110,10 @@ Practicals as an HTML page.
 Materials. - Data for presentations, practicals.
 ========================================================
 
-All data to run code in the presentations and in the practicals is available in the zip archive. This includes raw data (MACS peak calls) as well R objects containing pre-compiled results.
+All data to run code in the presentations and in the practicals is available in the zip archive. This includes raw data (MACS peak calls) as well as R objects containing pre-compiled results.
 
 **data/MacsPeaks/**
-- MACS peak calls for 4 Myc ChIP-seq ending in *"_peaks.xls"*
+- MACS peak calls for the 4 Myc ChIP-seq datasets ending in *"_peaks.xls"*
 + 2 replicates of Myc ChIP from Mel cell-line (mycmelrep1,mycmelrep1) 
 + 2 replicates of Myc ChIP from Ch12 cell-line (mycch12rep1,mycch12rep1)
 
@@ -129,15 +129,15 @@ Set the Working directory
 
 Before running any of the code in the practicals or slides we need to set the working directory to the folder we unarchived. 
 
-You may navigate to the unarchived short_ChIPseq folder in the Rstudio menu
+You may navigate to the unarchived ChIPseq_short folder in the Rstudio menu
 
 **Session -> Set Working Directory -> Choose Directory**
 
 or in the console.
 
 ```{r,eval=F} 
-setwd("/PathToMyDownload/short_ChIPseq")
-# e.g. setwd("~/Downloads/short_ChIPseq")
+setwd("/PathToMyDownload/ChIPseq_short")
+# e.g. setwd("~/Downloads/ChIPseq_short")
 ```
 
 Working With ChIP-seq data in R
@@ -201,7 +201,7 @@ Quality Control (Fraction of reads in peaks - FRIP/RIP)
 
 RIP/FRIP/PTIH/SPOT all are measurements of the fraction/percentage of reads landing in peaks. Variability in the proportion of reads in peaks for ChIP-seq samples can identify poorer quality replicates.
 
-```{r}
+```{r fig.height=5, fig.width=15}
 frip(res)
 plotFrip(res)
 ```
@@ -221,7 +221,7 @@ Quality Control (Assessing fragment length)
 ========================================================
 ChIPQC has already calculated change in coverage between successive shifts of the "+" strand reads towards "-" strand reads and we can plot these for inspection with the **plotCC** function. 
 
-```{r}
+```{r fig.height=5, fig.width=15}
 ccplot <- plotCC(res)
 ccplot$layers <- ccplot$layers[1]
 ccplot
@@ -253,7 +253,7 @@ The plotSSD function plots samples's pre-blacklisting score in **red** and post-
 
 Higher scores for pre-blacklisted SSD can suggest a strong background signal in blacklisted regions for that sample.
 
-```{r}
+```{r fig.height=5, fig.width=15}
 plotSSD(res)+xlim(0,14)
 ```
 
@@ -264,7 +264,7 @@ Since SSD score is strongly affected by blacklisting it may be necessary to chan
 
 Higher post-blacklisted SSD scores reflect samples with stronger peak signal.
 
-```{r}
+```{r fig.height=5, fig.width=15}
 plotSSD(res)+xlim(0.2,0.4)
 ```
 
@@ -532,6 +532,13 @@ Time for a exercise.
 
 Exercise on "Working with peaks" can be found [here](presentations/practicals/WorkingWithPeaks_Exercises.html).
 
+Time for a solution.
+=========================================================
+
+Answers on "Working with peaks" can be found [here](presentations/practicals/WorkingWithPeaks_Solutions.html).
+
+Rcode for "Working with peaks" solutions can be found [here](presentations/practicals/WorkingWithPeaks.R).
+
 Functional Annotation of peaks
 =========================================================
 id: functional
@@ -617,7 +624,7 @@ Visualising peak annotation
 Now we have the annotated peaks from ChIPseeker we can use some of ChIPseeker's plotting functions to display distribution of peaks in gene features. Here we use the **plotAnnoBar** function to plot this as a bar chart but  **plotAnnoPie** would produce a similar plot as a pie chart.
 
 
-```{r, eval=T, echo=T, fig.height=3, fig.width=15, warning=FALSE, tidy=T}
+```{r, eval=T, echo=T, fig.height=5, fig.width=15, warning=FALSE, tidy=T}
 plotAnnoBar(peakAnno)
 ```
 
@@ -626,7 +633,7 @@ Visualising peak annotation
 Similarly we can plot the distribution of peaks around TSS sites.
 
 
-```{r,eval=T,echo=T, eval=T, echo=T, warning=FALSE,tidy=T}
+```{r,eval=T,echo=T, eval=T, echo=T, warning=FALSE,fig.height=5, fig.width=15,tidy=T}
 plotDistToTSS(peakAnno)
 ```
 
@@ -791,6 +798,13 @@ Time for an exercise
 =========================================================
 Exercise on "Functional Annotation of peaks" can be found [here](presentations/practicals/FunctionalAnnotationOfPeaks_Exercises.html).
 
+Time for a solution.
+=========================================================
+
+Answers on "Functional Annotation of peaks" can be found [here](presentations/practicals/FunctionalAnnotationOfPeaks_Solutions.html).
+
+Rcode for "Functional Annotation of peaks" solutions can be found [here](presentations/practicals/FunctionalAnnotationOfPeaks.R).
+
 Identifying Motifs
 ==========================================================
 id: motifs
@@ -867,6 +881,13 @@ Time for an exercise
 =========================================================
 Exercise on "Identifying Motifs" can be found [here](presentations/practicals/IdentifyingMotifs_Exercises.html).
 
+Time for a solution.
+=========================================================
+
+Answers on "Identifying Motifs" can be found [here](presentations/practicals/IdentifyingMotifs__Solutions.html).
+
+Rcode for "Identifying Motifs" solutions can be found [here](presentations/practicals/IdentifyingMotifs.R).
+
 
 Getting hold of Data
 ========================================================
@@ -920,6 +941,13 @@ export.bed(commonPeaks,con = "consensusPeaksForIGV.bed")
 Time for an exercise
 =========================================================
 Exercise on "External Data and Visualisation" can be found [here](presentations/practicals/External_Data_and_Visualisation_Exercises.html).
+
+Time for a solution.
+=========================================================
+
+Answers on "External Data and Visualisation" can be found [here](presentations/practicals/External_Data_and_Visualisation_Solutions.html).
+
+Rcode for "External Data and Visualisation" solutions can be found [here](presentations/practicals/External_Data_and_Visualisation.R).
 
 Working with complex overlaps
 =========================================================

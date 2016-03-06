@@ -12,7 +12,7 @@ In the second half of the practicals we will perform an enrichment analysis on t
 * First lets read in the two Myc Mel peakset replicates as we did for our previous exercise.
 
 ```{r,collapse=T,echo=F}
-knitr::opts_chunk$set(echo = T,eval = T)
+knitr::opts_chunk$set(echo = F,eval = F)
 ```
 
 ```{r,collapse=T,echo=F}
@@ -34,7 +34,7 @@ suppressPackageStartupMessages(
 )
 
 ```
-```{r,collapse=T,echo=T}
+```{r,collapse=T}
 library(GenomicRanges)
 library(ChIPseeker)
 library(org.Mm.eg.db)
@@ -66,7 +66,7 @@ mcols(melRep2_GR) <- melPeak_Rep2[,c("abs_summit", "fold_enrichment")]
 
 * Now annotate the two peaksets to mm9 UCSC genes and draw the distribution of peaks in genomic features and distance of peaks to TSS regions.
 
-```{r,collapse=T,echo=T}
+```{r,collapse=T}
 library(GenomeInfoDb)
 
 seqlevelsStyle(melRep1_GR) <- "UCSC"
@@ -90,7 +90,7 @@ plotDistToTSS(peakAnno_MelRep2)
 * ChIPseeker allows the user to plot multiple samples in one plot. Combine the csAnno objects for each sample into a list and name elements with their respective sample names. Use the list of csAnno objects with **plotAnnoBar** function.
 
 
-```{r,collapse=T,echo=T}
+```{r,collapse=T}
 Mel_Rep1_and_Rep2 <- list(peakAnno_MelRep1,peakAnno_MelRep2)
 names(Mel_Rep1_and_Rep2) <- c("Rep1","Rep2")
 plotAnnoBar(Mel_Rep1_and_Rep2)
@@ -98,7 +98,7 @@ plotAnnoBar(Mel_Rep1_and_Rep2)
 
 * Retrieve all unique names (**as SYMBOLS**) of genes with peaks in their TSS/promoter for replicate 1 and 2.
 
-```{r,collapse=T,echo=T}
+```{r,collapse=T}
 peakAnno_MelRep1_GR <- as.GRanges(peakAnno_MelRep1)
 peakAnno_MelRep2_GR <- as.GRanges(peakAnno_MelRep2)
 
@@ -109,7 +109,7 @@ MelRep1_genesWithPeakInTSS <- unique(peakAnno_MelRep1_GR[peakAnno_MelRep1_GR$ann
 
 * Create an object containing of Myc peaks in Mel replicate 1 overlapping Myc peaks in Mel replicate 2.
 
-```{r,collapse=T,echo=T}
+```{r,collapse=T}
 melRep1_GR_InRep1AndRep2 <- melRep1_GR[melRep1_GR %over% melRep2_GR]
 melRep1_GR_InRep1AndRep2
 ```
@@ -123,10 +123,10 @@ suppressPackageStartupMessages(
 )
 
 ```
-```{r,collapse=T,echo=T}
+```{r,collapse=T}
 library(rGREAT)
 ```
-```{r,collapse=T,echo=T}
+```{r,collapse=T}
 # Should already be in UCSC format..but just incase
 seqlevelsStyle(melRep1_GR_InRep1AndRep2) <- "UCSC"
 
