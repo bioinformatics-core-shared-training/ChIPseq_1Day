@@ -20,7 +20,7 @@ Each section is presented as both HTMl and Rpres markdown ( to allow for intergr
 Course material and exercises are available to view as rendered HTML slides or single page HTML at [http://mrccsc.github.io/ChIPseq_short/](http://mrccsc.github.io/ChIPseq_short).  
 All material is available to download under GPL v3 license.
 
-For  information on other courses run by our team see our [github IO page](http://mrccsc.github.io/training/).
+For  information on other courses run by our team see our [github IO page](http://mrccsc.github.io/training.html).
 
 
 ## The Team
