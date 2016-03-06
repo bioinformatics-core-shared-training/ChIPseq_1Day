@@ -1,9 +1,13 @@
 ChIP-seq Intro 
 ========================================================
-
-MRC CSC Bioinformatics Core
-
-http://mrccsc.github.io/training.html
+author:MRC CSC Bioinformatics Core
+date:http://mrccsc.github.io/ChIPseq_short/
+width: 1440
+height: 1100
+autosize: true
+font-import: <link href='http://fonts.googleapis.com/css?family=Slabo+27px' rel='stylesheet' type='text/css'>
+font-family: 'Slabo 27px', serif;
+css:style.css
 
 ChIP-seq introduction 
 ========================================================
@@ -71,7 +75,7 @@ Story so far.
 ========================================================
 id: background
 
-In this course we will use some of the Encode data for Myc ChIP-seq in mouse aligned to the mm9 genome.
+In this course we will use some of the Encode data for Myc ChIP-seq in mouse aligned to the mm9 genome (GEO - GSM912934, GSM912906).
 
 This data is composed of Myc chip for two cell lines, Mel and Ch12 cell lines, each with two replicates.
 
@@ -84,10 +88,10 @@ Materials.
 id: materials
 
 All material for this course can be found on github.
-* [short_ChIPseq](https://github.com/ThomasCarroll/short_ChIPseq/)
+* [ChIPseq_short](https://github.com/mrccsc/ChIPseq_short)
 
 Or can be downloaded as a zip archive from here. 
-* [Download zip](https://github.com/ThomasCarroll/short_ChIPseq/archive/2f6bc2972c80bb53ad9c59305ceeab5a76d597cd.zip)
+* [Download zip](https://github.com/mrccsc/ChIPseq_short/archive/master.zip)
 
 Materials. - Presentations, source code and practicals.
 ========================================================
@@ -106,10 +110,10 @@ Practicals as an HTML page.
 Materials. - Data for presentations, practicals.
 ========================================================
 
-All data to run code in the presentations and in the practicals is available in the zip archive. This includes raw data (MACS peak calls) as well R objects containing pre-compiled results.
+All data to run code in the presentations and in the practicals is available in the zip archive. This includes raw data (MACS peak calls) as well as R objects containing pre-compiled results.
 
 **data/MacsPeaks/**
-- MACS peak calls for 4 Myc ChIP-seq ending in *"_peaks.xls"*
+- MACS peak calls for the 4 Myc ChIP-seq datasets ending in *"_peaks.xls"*
 + 2 replicates of Myc ChIP from Mel cell-line (mycmelrep1,mycmelrep1) 
 + 2 replicates of Myc ChIP from Ch12 cell-line (mycch12rep1,mycch12rep1)
 
@@ -125,7 +129,7 @@ Set the Working directory
 
 Before running any of the code in the practicals or slides we need to set the working directory to the folder we unarchived. 
 
-You may navigate to the unarchived short_ChIPseq folder in the Rstudio menu
+You may navigate to the unarchived ChIPseq_short folder in the Rstudio menu
 
 **Session -> Set Working Directory -> Choose Directory**
 
@@ -133,8 +137,8 @@ or in the console.
 
 
 ```r
-setwd("/PathToMyDownload/short_ChIPseq")
-# e.g. setwd("~/Downloads/short_ChIPseq")
+setwd("/PathToMyDownload/ChIPseq_short")
+# e.g. setwd("~/Downloads/ChIPseq_short")
 ```
 
 Working With ChIP-seq data in R
@@ -775,6 +779,13 @@ Time for a exercise.
 
 Exercise on "Working with peaks" can be found [here](presentations/practicals/WorkingWithPeaks_Exercises.html).
 
+Time for a solution.
+=========================================================
+
+Answers on "Working with peaks" can be found [here](presentations/practicals/WorkingWithPeaks_Solutions.html).
+
+Rcode for "Working with peaks" solutions can be found [here](presentations/practicals/WorkingWithPeaks.R).
+
 Functional Annotation of peaks
 =========================================================
 id: functional
@@ -856,13 +867,13 @@ peakAnno <- annotatePeak(commonPeaks, tssRegion = c(-1000, 1000), TxDb = TxDb.Mm
 ```
 
 ```
->> preparing features information...		 2016-03-05 19:32:51 
->> identifying nearest features...		 2016-03-05 19:32:52 
->> calculating distance from peak to TSS...	 2016-03-05 19:32:53 
->> assigning genomic annotation...		 2016-03-05 19:32:53 
->> adding gene annotation...			 2016-03-05 19:33:03 
->> assigning chromosome lengths			 2016-03-05 19:33:13 
->> done...					 2016-03-05 19:33:13 
+>> preparing features information...		 2016-03-06 16:43:09 
+>> identifying nearest features...		 2016-03-06 16:43:09 
+>> calculating distance from peak to TSS...	 2016-03-06 16:43:10 
+>> assigning genomic annotation...		 2016-03-06 16:43:10 
+>> adding gene annotation...			 2016-03-06 16:43:20 
+>> assigning chromosome lengths			 2016-03-06 16:43:30 
+>> done...					 2016-03-06 16:43:30 
 ```
 
 Peak annotation
@@ -1210,6 +1221,13 @@ Time for an exercise
 =========================================================
 Exercise on "Functional Annotation of peaks" can be found [here](presentations/practicals/FunctionalAnnotationOfPeaks_Exercises.html).
 
+Time for a solution.
+=========================================================
+
+Answers on "Functional Annotation of peaks" can be found [here](presentations/practicals/FunctionalAnnotationOfPeaks_Solutions.html).
+
+Rcode for "Functional Annotation of peaks" solutions can be found [here](presentations/practicals/FunctionalAnnotationOfPeaks.R).
+
 Identifying Motifs
 ==========================================================
 id: motifs
@@ -1307,6 +1325,13 @@ Time for an exercise
 =========================================================
 Exercise on "Identifying Motifs" can be found [here](presentations/practicals/IdentifyingMotifs_Exercises.html).
 
+Time for a solution.
+=========================================================
+
+Answers on "Identifying Motifs" can be found [here](presentations/practicals/IdentifyingMotifs__Solutions.html).
+
+Rcode for "Identifying Motifs" solutions can be found [here](presentations/practicals/IdentifyingMotifs.R).
+
 
 Getting hold of Data
 ========================================================
@@ -1393,6 +1418,13 @@ export.bed(commonPeaks,con = "consensusPeaksForIGV.bed")
 Time for an exercise
 =========================================================
 Exercise on "External Data and Visualisation" can be found [here](presentations/practicals/External_Data_and_Visualisation_Exercises.html).
+
+Time for a solution.
+=========================================================
+
+Answers on "External Data and Visualisation" can be found [here](presentations/practicals/External_Data_and_Visualisation_Solutions.html).
+
+Rcode for "External Data and Visualisation" solutions can be found [here](presentations/practicals/External_Data_and_Visualisation.R).
 
 Working with complex overlaps
 =========================================================
