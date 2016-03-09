@@ -1,6 +1,6 @@
 ---
 title: "External Data and Visualisation"
-author: "MRC Clinical Sciences Bioinformatics"
+author: "MRC Clinical Sciences Bioinformatics Team"
 date: "29 February 2016"
 output: html_document
 ---
@@ -12,7 +12,7 @@ The external data we use will be Ebf1 ChIP-seq from Mouse genome mm10 (Not mm9!!
 * First lets find the data we need. Look for Ebf Pro-B cell and B cell ChIP-seq Mus Musculus data in AnnotationHub using the **query** function and retrieve into R.
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = F,eval=F)
+knitr::opts_chunk$set(echo = T,eval=T)
 ```
 
 ```{r,cache=T}
@@ -63,15 +63,16 @@ great_ResultTable = getEnrichmentTables(great_Job,category=
 names(great_ResultTable)
 msigdb_great_ResultTable <- great_ResultTable[["MSigDB Pathway"]]
 
+msigdb_great_ResultTable[1:5,]
 ```
 
 * Find denovo motifs underneath flattened peaks common to both Pro B cells and B cells. You will need to install the library for mm10 sequences (BSgenome.Mmusculus.UCSC.mm10.)
 
-```{r,cache=T,eval=F}
+```{r,cache=T}
 seqlevelsStyle(common_Ebf_Peaks) <- "UCSC"
 common_Ebf_Peaks_Resized <- resize(common_Ebf_Peaks,200,fix = "center")
 
-
+library(BSgenome.Mmusculus.UCSC.mm10)
 genome <- BSgenome.Mmusculus.UCSC.mm10
 
 seqlevelsStyle(common_Ebf_Peaks) <- "UCSC"

@@ -1,5 +1,6 @@
 ---
 title: "ChIP-seq Identifying Motifs - practical"
+author: "MRC Clinical Sciences Bioinformatics"
 output: html_document
 ---
 
@@ -9,7 +10,7 @@ In this practical we will read in two replicate sets of peaks from the Myc Encod
 
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = F,eval = F)
+knitr::opts_chunk$set(echo = T,eval = T)
 ```
 
 ```{r,collapse=T,echo=F}
@@ -88,8 +89,11 @@ writeXStringSet(top500_melRep1_1And2_Resized_Seq,file="top500_melRep1_1And2.fa")
 
 * Upload the sequences to Meme-ChIP and review the results when complete.
 
-* Bonus question - **Recentre top 500 peaks around their absolute summit**, resize to 200, extract sequences and submit to Meme-ChIP. Compare results between peaksets.
+**Once you have uploaded the data you can preview the results [here](http://mrccsc.github.io/appMEMECHIP_4.11.11457523923197-718963456/meme-chip.html)**
 
+** Bonus question - **Recentre top 500 peaks around their absolute summit**, resize to 200, extract sequences and submit to Meme-ChIP. Compare results between peaksets.
+
+**Once you have uploaded the data you can preview the results [here](http://mrccsc.github.io/appMEMECHIP_4.11.114575239877311434368117/meme-chip.html)**
 ```{r,collapse=T}
 
 start(top500_melRep1_Rep1AndRep2) <- end(top500_melRep1_Rep1AndRep2) <- top500_melRep1_Rep1AndRep2$abs_summit

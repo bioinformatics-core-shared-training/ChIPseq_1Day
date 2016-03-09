@@ -1,4 +1,4 @@
-ChIP-seq Intro 
+ChIP-seq 
 ========================================================
 author:MRC CSC Bioinformatics Core
 date:http://mrccsc.github.io/ChIPseq_short/
@@ -269,7 +269,7 @@ For a note on SSD
 Quality Control - Standardised Standard Deviation.
 ========================================================
 
-ChIPQC calculates SSD before after removing signal coming from Blacklisted regions.
+ChIPQC calculates SSD before and after removing signal coming from Blacklisted regions.
 
 The plotSSD function plots samples's pre-blacklisting score in **red** and post-blacklisting score in **blue**.
 
@@ -778,14 +778,31 @@ length(commonPeaks)
 Time for a exercise.
 =========================================================
 
-Exercise on "Working with peaks" can be found [here](presentations/practicals/WorkingWithPeaks_Exercises.html).
+Exercise on "Working with peaks" can be found [here](http://mrccsc.github.io/ChIPseq_short/course/presentations/practicals/WorkingWithPeaks_Exercises.html).
 
 Time for a solution.
 =========================================================
 
-Answers on "Working with peaks" can be found [here](presentations/practicals/WorkingWithPeaks_Solutions.html).
+Answers on "Working with peaks" can be found [here](http://mrccsc.github.io/ChIPseq_short/course/presentations/practicals/WorkingWithPeaks_Solutions.html).
 
-Rcode for "Working with peaks" solutions can be found [here](presentations/practicals/WorkingWithPeaks.R).
+Rcode for "Working with peaks" solutions can be found [here](http://mrccsc.github.io/ChIPseq_short/course/presentations/practicals/WorkingWithPeaks.R).
+
+
+Time to install a package.
+=========================================================
+
+In this next section we will be using a package ,**rGREAT**, which has not been pre-installed on these machines.
+
+We saw how to install packages in R and Bioconductor sessions.
+
+You can go to the [rGREAT Bioconductor page](https://www.bioconductor.org/packages/release/bioc/html/rGREAT.html) and follow their instrutions or simply paste the below code into the console.
+
+
+```r
+source("https://bioconductor.org/biocLite.R")
+biocLite("rGREAT")
+```
+
 
 Functional Annotation of peaks
 =========================================================
@@ -868,13 +885,13 @@ peakAnno <- annotatePeak(commonPeaks, tssRegion = c(-1000, 1000), TxDb = TxDb.Mm
 ```
 
 ```
->> preparing features information...		 2016-03-09 20:17:06 
->> identifying nearest features...		 2016-03-09 20:17:07 
->> calculating distance from peak to TSS...	 2016-03-09 20:17:08 
->> assigning genomic annotation...		 2016-03-09 20:17:08 
->> adding gene annotation...			 2016-03-09 20:17:19 
->> assigning chromosome lengths			 2016-03-09 20:17:31 
->> done...					 2016-03-09 20:17:31 
+>> preparing features information...		 2016-03-09 23:05:27 
+>> identifying nearest features...		 2016-03-09 23:05:28 
+>> calculating distance from peak to TSS...	 2016-03-09 23:05:28 
+>> assigning genomic annotation...		 2016-03-09 23:05:28 
+>> adding gene annotation...			 2016-03-09 23:05:38 
+>> assigning chromosome lengths			 2016-03-09 23:05:49 
+>> done...					 2016-03-09 23:05:49 
 ```
 
 Peak annotation
@@ -965,7 +982,7 @@ Now we have the annotated peaks from ChIPseeker we can use some of ChIPseeker's 
 plotAnnoBar(peakAnno)
 ```
 
-![plot of chunk unnamed-chunk-29](ChIPseq-figure/unnamed-chunk-29-1.png)
+![plot of chunk unnamed-chunk-30](ChIPseq-figure/unnamed-chunk-30-1.png)
 
 Visualising peak annotation
 =========================================================
@@ -977,7 +994,7 @@ Similarly we can plot the distribution of peaks around TSS sites.
 plotDistToTSS(peakAnno)
 ```
 
-![plot of chunk unnamed-chunk-30](ChIPseq-figure/unnamed-chunk-30-1.png)
+![plot of chunk unnamed-chunk-31](ChIPseq-figure/unnamed-chunk-31-1.png)
 
 Visualising peak annotation
 =========================================================
@@ -989,7 +1006,7 @@ ChIPseeker can also offer a succinct plot to describe the overlap between annota
 upsetplot(peakAnno, vennpie = F)
 ```
 
-![plot of chunk unnamed-chunk-31](ChIPseq-figure/unnamed-chunk-31-1.png)
+![plot of chunk unnamed-chunk-32](ChIPseq-figure/unnamed-chunk-32-1.png)
 
 
 Gene Ontology and geneset testing.
@@ -1219,14 +1236,14 @@ great_ResultTable[["MSigDB Predicted Promoter Motifs"]][1:4, ]
 
 Time for an exercise
 =========================================================
-Exercise on "Functional Annotation of peaks" can be found [here](presentations/practicals/FunctionalAnnotationOfPeaks_Exercises.html).
+Exercise on "Functional Annotation of peaks" can be found [here](http://mrccsc.github.io/ChIPseq_short/course/presentations/practicals/FunctionalAnnotationOfPeaks_Exercises.html).
 
 Time for a solution.
 =========================================================
 
-Answers on "Functional Annotation of peaks" can be found [here](presentations/practicals/FunctionalAnnotationOfPeaks_Solutions.html).
+Answers on "Functional Annotation of peaks" can be found [here](http://mrccsc.github.io/ChIPseq_short/course/presentations/practicals/FunctionalAnnotationOfPeaks_Solutions.html).
 
-Rcode for "Functional Annotation of peaks" solutions can be found [here](presentations/practicals/FunctionalAnnotationOfPeaks.R).
+Rcode for "Functional Annotation of peaks" solutions can be found [here](http://mrccsc.github.io/ChIPseq_short/course/presentations/practicals/FunctionalAnnotationOfPeaks.R).
 
 Identifying Motifs
 ==========================================================
@@ -1319,18 +1336,18 @@ Now the file "consensusPeaks.fa" contains sequences around the geometric centre 
 
 In your own work you will typically run this from a big machine (such as a cluster) with Meme installed locally but today we will upload our generated FASTA file to their [web portal](http://meme-suite.org/tools/meme-chip). 
 
-Results files from Meme-ChIP can be found [here]()
+Results files from Meme-ChIP can be found [here](http://mrccsc.github.io/myc_Meme_Example/meme-chip.html)
 
 Time for an exercise
 =========================================================
-Exercise on "Identifying Motifs" can be found [here](presentations/practicals/IdentifyingMotifs_Exercises.html).
+Exercise on "Identifying Motifs" can be found [here](http://mrccsc.github.io/ChIPseq_short/course/presentations/practicals/IdentifyingMotifs_Exercises.html).
 
 Time for a solution.
 =========================================================
 
-Answers on "Identifying Motifs" can be found [here](presentations/practicals/IdentifyingMotifs__Solutions.html).
+Answers on "Identifying Motifs" can be found [here](http://mrccsc.github.io/ChIPseq_short/course/presentations/practicals/IdentifyingMotifs__Solutions.html).
 
-Rcode for "Identifying Motifs" solutions can be found [here](presentations/practicals/IdentifyingMotifs.R).
+Rcode for "Identifying Motifs" solutions can be found [here](http://mrccsc.github.io/ChIPseq_short/course/presentations/practicals/IdentifyingMotifs.R).
 
 
 Getting hold of Data
@@ -1364,7 +1381,7 @@ query(ah, c("Myc","BED", "Mus Musculus"))
 
 ```
 AnnotationHub with 1 record
-# snapshotDate(): 2016-01-25 
+# snapshotDate(): 2016-03-09 
 # names(): AH28051
 # $dataprovider: Haemcode
 # $species: Mus musculus
@@ -1417,14 +1434,39 @@ export.bed(commonPeaks,con = "consensusPeaksForIGV.bed")
 
 Time for an exercise
 =========================================================
-Exercise on "External Data and Visualisation" can be found [here](presentations/practicals/External_Data_and_Visualisation_Exercises.html).
+Exercise on "External Data and Visualisation" can be found [here](http://mrccsc.github.io/ChIPseq_short/course/presentations/practicals/External_Data_and_Visualisation_Exercises.html).
+
+Installing a package to a personal directory.
+=========================================================
+
+Sometimes you will be working on a machine you don't have full permissions for.
+
+In these cases it is possible to install into and use a library from a local directory.
+
+* Create a directory on your desktop called Rlibs.
+
+* Download zipped file for [BSgenome.Mmusculus.UCSC.mm10  package](http://bioconductor.org/packages/release/data/annotation/html/BSgenome.Mmusculus.UCSC.mm10.html) required for the bonus question manually. [(Direct Download)](http://bioconductor.org/packages/release/data/annotation/src/contrib/BSgenome.Mmusculus.UCSC.mm10_1.4.0.tar.gz)
+
+* Install using install.packages using the Rlibs directory as your library location.
+
+
+```r
+# Something like this
+install.packages( "C:/Users/MYUSERNAME/Desktop/BSgenome.Mmusculus.UCSC.mm10_1.4.0.tar.gz", lib="C:/Users/MYUSERNAME/Desktop/Rlibs", repos = NULL, type = "source"
+                  )
+
+library(BSgenome.Mmusculus.UCSC.mm10, lib.loc="C:/Users/tcarroll/MYUSERNAME/Rlibs"
+        )
+```
+
 
 Time for a solution.
 =========================================================
 
-Answers on "External Data and Visualisation" can be found [here](presentations/practicals/External_Data_and_Visualisation_Solutions.html).
+Answers on "External Data and Visualisation" can be found [here](http://mrccsc.github.io/ChIPseq_short/course/presentations/practicals/External_Data_and_Visualisation_Solutions.html).
 
-Rcode for "External Data and Visualisation" solutions can be found [here](presentations/practicals/External_Data_and_Visualisation.R).
+Rcode for "External Data and Visualisation" solutions can be found [here](http://mrccsc.github.io/ChIPseq_short/course/presentations/practicals/External_Data_and_Visualisation.R).
+
 
 Working with complex overlaps
 =========================================================
@@ -1516,7 +1558,7 @@ Or we can view as VennDiagram
 vennDiagram(as.data.frame(elementMetadata(flattenedPeaks)))
 ```
 
-![plot of chunk unnamed-chunk-51](ChIPseq-figure/unnamed-chunk-51-1.png)
+![plot of chunk unnamed-chunk-53](ChIPseq-figure/unnamed-chunk-53-1.png)
 
 We can check the Venn to see our numbers add up
 
@@ -1609,7 +1651,7 @@ boxplot(width(highConfidence_Only))
 abline(h=400,col="red")
 ```
 
-![plot of chunk unnamed-chunk-55](ChIPseq-figure/unnamed-chunk-55-1.png)
+![plot of chunk unnamed-chunk-57](ChIPseq-figure/unnamed-chunk-57-1.png)
 
 The majority of peaks are around 400 so we will resize all peaks to this for ease here
 

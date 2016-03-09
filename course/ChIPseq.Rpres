@@ -1,4 +1,4 @@
-ChIP-seq Intro 
+ChIP-seq 
 ========================================================
 author:MRC CSC Bioinformatics Core
 date:http://mrccsc.github.io/ChIPseq_short/
@@ -248,7 +248,7 @@ For a note on SSD
 Quality Control - Standardised Standard Deviation.
 ========================================================
 
-ChIPQC calculates SSD before after removing signal coming from Blacklisted regions.
+ChIPQC calculates SSD before and after removing signal coming from Blacklisted regions.
 
 The plotSSD function plots samples's pre-blacklisting score in **red** and post-blacklisting score in **blue**.
 
@@ -531,14 +531,30 @@ length(commonPeaks)
 Time for a exercise.
 =========================================================
 
-Exercise on "Working with peaks" can be found [here](presentations/practicals/WorkingWithPeaks_Exercises.html).
+Exercise on "Working with peaks" can be found [here](http://mrccsc.github.io/ChIPseq_short/course/presentations/practicals/WorkingWithPeaks_Exercises.html).
 
 Time for a solution.
 =========================================================
 
-Answers on "Working with peaks" can be found [here](presentations/practicals/WorkingWithPeaks_Solutions.html).
+Answers on "Working with peaks" can be found [here](http://mrccsc.github.io/ChIPseq_short/course/presentations/practicals/WorkingWithPeaks_Solutions.html).
 
-Rcode for "Working with peaks" solutions can be found [here](presentations/practicals/WorkingWithPeaks.R).
+Rcode for "Working with peaks" solutions can be found [here](http://mrccsc.github.io/ChIPseq_short/course/presentations/practicals/WorkingWithPeaks.R).
+
+
+Time to install a package.
+=========================================================
+
+In this next section we will be using a package ,**rGREAT**, which has not been pre-installed on these machines.
+
+We saw how to install packages in R and Bioconductor sessions.
+
+You can go to the [rGREAT Bioconductor page](https://www.bioconductor.org/packages/release/bioc/html/rGREAT.html) and follow their instrutions or simply paste the below code into the console.
+
+```{r,eval=F}
+source("https://bioconductor.org/biocLite.R")
+biocLite("rGREAT")
+```
+
 
 Functional Annotation of peaks
 =========================================================
@@ -796,14 +812,14 @@ great_ResultTable[["MSigDB Predicted Promoter Motifs"]][1:4,]
 
 Time for an exercise
 =========================================================
-Exercise on "Functional Annotation of peaks" can be found [here](presentations/practicals/FunctionalAnnotationOfPeaks_Exercises.html).
+Exercise on "Functional Annotation of peaks" can be found [here](http://mrccsc.github.io/ChIPseq_short/course/presentations/practicals/FunctionalAnnotationOfPeaks_Exercises.html).
 
 Time for a solution.
 =========================================================
 
-Answers on "Functional Annotation of peaks" can be found [here](presentations/practicals/FunctionalAnnotationOfPeaks_Solutions.html).
+Answers on "Functional Annotation of peaks" can be found [here](http://mrccsc.github.io/ChIPseq_short/course/presentations/practicals/FunctionalAnnotationOfPeaks_Solutions.html).
 
-Rcode for "Functional Annotation of peaks" solutions can be found [here](presentations/practicals/FunctionalAnnotationOfPeaks.R).
+Rcode for "Functional Annotation of peaks" solutions can be found [here](http://mrccsc.github.io/ChIPseq_short/course/presentations/practicals/FunctionalAnnotationOfPeaks.R).
 
 Identifying Motifs
 ==========================================================
@@ -875,18 +891,18 @@ Now the file "consensusPeaks.fa" contains sequences around the geometric centre 
 
 In your own work you will typically run this from a big machine (such as a cluster) with Meme installed locally but today we will upload our generated FASTA file to their [web portal](http://meme-suite.org/tools/meme-chip). 
 
-Results files from Meme-ChIP can be found [here]()
+Results files from Meme-ChIP can be found [here](http://mrccsc.github.io/myc_Meme_Example/meme-chip.html)
 
 Time for an exercise
 =========================================================
-Exercise on "Identifying Motifs" can be found [here](presentations/practicals/IdentifyingMotifs_Exercises.html).
+Exercise on "Identifying Motifs" can be found [here](http://mrccsc.github.io/ChIPseq_short/course/presentations/practicals/IdentifyingMotifs_Exercises.html).
 
 Time for a solution.
 =========================================================
 
-Answers on "Identifying Motifs" can be found [here](presentations/practicals/IdentifyingMotifs__Solutions.html).
+Answers on "Identifying Motifs" can be found [here](http://mrccsc.github.io/ChIPseq_short/course/presentations/practicals/IdentifyingMotifs__Solutions.html).
 
-Rcode for "Identifying Motifs" solutions can be found [here](presentations/practicals/IdentifyingMotifs.R).
+Rcode for "Identifying Motifs" solutions can be found [here](http://mrccsc.github.io/ChIPseq_short/course/presentations/practicals/IdentifyingMotifs.R).
 
 
 Getting hold of Data
@@ -940,14 +956,38 @@ export.bed(commonPeaks,con = "consensusPeaksForIGV.bed")
 
 Time for an exercise
 =========================================================
-Exercise on "External Data and Visualisation" can be found [here](presentations/practicals/External_Data_and_Visualisation_Exercises.html).
+Exercise on "External Data and Visualisation" can be found [here](http://mrccsc.github.io/ChIPseq_short/course/presentations/practicals/External_Data_and_Visualisation_Exercises.html).
+
+Installing a package to a personal directory.
+=========================================================
+
+Sometimes you will be working on a machine you don't have full permissions for.
+
+In these cases it is possible to install into and use a library from a local directory.
+
+* Create a directory on your desktop called Rlibs.
+
+* Download zipped file for [BSgenome.Mmusculus.UCSC.mm10  package](http://bioconductor.org/packages/release/data/annotation/html/BSgenome.Mmusculus.UCSC.mm10.html) required for the bonus question manually. [(Direct Download)](http://bioconductor.org/packages/release/data/annotation/src/contrib/BSgenome.Mmusculus.UCSC.mm10_1.4.0.tar.gz)
+
+* Install using install.packages using the Rlibs directory as your library location.
+
+```{r,eval=F,echo=T,cache=T}
+# Something like this
+install.packages( "C:/Users/MYUSERNAME/Desktop/BSgenome.Mmusculus.UCSC.mm10_1.4.0.tar.gz", lib="C:/Users/MYUSERNAME/Desktop/Rlibs", repos = NULL, type = "source"
+                  )
+
+library(BSgenome.Mmusculus.UCSC.mm10, lib.loc="C:/Users/tcarroll/MYUSERNAME/Rlibs"
+        )
+```
+
 
 Time for a solution.
 =========================================================
 
-Answers on "External Data and Visualisation" can be found [here](presentations/practicals/External_Data_and_Visualisation_Solutions.html).
+Answers on "External Data and Visualisation" can be found [here](http://mrccsc.github.io/ChIPseq_short/course/presentations/practicals/External_Data_and_Visualisation_Solutions.html).
 
-Rcode for "External Data and Visualisation" solutions can be found [here](presentations/practicals/External_Data_and_Visualisation.R).
+Rcode for "External Data and Visualisation" solutions can be found [here](http://mrccsc.github.io/ChIPseq_short/course/presentations/practicals/External_Data_and_Visualisation.R).
+
 
 Working with complex overlaps
 =========================================================
