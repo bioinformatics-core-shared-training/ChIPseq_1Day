@@ -12,7 +12,7 @@ The external data we use will be Ebf1 ChIP-seq from Mouse genome mm10 (Not mm9!!
 * First lets find the data we need. Look for Ebf Pro-B cell and B cell ChIP-seq Mus Musculus data in AnnotationHub using the **query** function and retrieve into R.
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = T,eval=T)
+knitr::opts_chunk$set(echo = F,eval=F)
 ```
 
 ```{r,cache=T}
@@ -66,7 +66,9 @@ msigdb_great_ResultTable <- great_ResultTable[["MSigDB Pathway"]]
 msigdb_great_ResultTable[1:5,]
 ```
 
-* Find denovo motifs underneath flattened peaks common to both Pro B cells and B cells. You will need to install the library for mm10 sequences (BSgenome.Mmusculus.UCSC.mm10.)
+* Find denovo motifs underneath flattened peaks common to both Pro B cells and B cells. You will need to install the library for mm10 sequence information (BSgenome.Mmusculus.UCSC.mm10.)
+
+**Once you have submitted the FASTA file to meme-chip you can check the [results at this page](http://mrccsc.github.io/ebf_meme/meme-chip.html)**
 
 ```{r,cache=T}
 seqlevelsStyle(common_Ebf_Peaks) <- "UCSC"
