@@ -531,14 +531,14 @@ length(commonPeaks)
 Time for a exercise.
 =========================================================
 
-Exercise on "Working with peaks" can be found [here](presentations/practicals/WorkingWithPeaks_Exercises.html).
+Exercise on "Working with peaks" can be found [here](http://mrccsc.github.io/ChIPseq_short/course/presentations/practicals/WorkingWithPeaks_Exercises.html).
 
 Time for a solution.
 =========================================================
 
-Answers on "Working with peaks" can be found [here](presentations/practicals/WorkingWithPeaks_Solutions.html).
+Answers on "Working with peaks" can be found [here](http://mrccsc.github.io/ChIPseq_short/course/presentations/practicals/WorkingWithPeaks_Solutions.html).
 
-Rcode for "Working with peaks" solutions can be found [here](presentations/practicals/WorkingWithPeaks.R).
+Rcode for "Working with peaks" solutions can be found [here](http://mrccsc.github.io/ChIPseq_short/course/presentations/practicals/WorkingWithPeaks.R).
 
 Functional Annotation of peaks
 =========================================================
