@@ -660,7 +660,6 @@ Sources of well curated genesets include [GO consortium](http://geneontology.org
 
 Geneset enrichment testing may be performed on the sets of genes with peaks associated to them. In this example we will consider genes with peaks within 1000bp of a gene's TSS. 
 
-[link to RNA-seq GOseq]()
 
 Gene ontology and geneset testing.
 =========================================================
@@ -785,7 +784,7 @@ Gene ontology and functional testing. GREAT method.
 
 The results table can be retrieved using the getEnrichmentTables function and specifying which tables we wish to review.
 
-Here we retrieve the results tables for the "Pathway Data" genesets which contains 3 seperate database results.
+Here we retrieve the results tables for the "MSigDB Predicted Promoter Motifs" genesets which contains 2 seperate database results.
 
 ```{r,eval=T,echo=T, eval=T, echo=T, warning=FALSE,tidy=T}
 great_ResultTable = getEnrichmentTables(great_Job,category=

@@ -868,13 +868,13 @@ peakAnno <- annotatePeak(commonPeaks, tssRegion = c(-1000, 1000), TxDb = TxDb.Mm
 ```
 
 ```
->> preparing features information...		 2016-03-09 18:54:10 
->> identifying nearest features...		 2016-03-09 18:54:10 
->> calculating distance from peak to TSS...	 2016-03-09 18:54:11 
->> assigning genomic annotation...		 2016-03-09 18:54:11 
->> adding gene annotation...			 2016-03-09 18:54:21 
->> assigning chromosome lengths			 2016-03-09 18:54:31 
->> done...					 2016-03-09 18:54:31 
+>> preparing features information...		 2016-03-09 19:27:50 
+>> identifying nearest features...		 2016-03-09 19:27:50 
+>> calculating distance from peak to TSS...	 2016-03-09 19:27:51 
+>> assigning genomic annotation...		 2016-03-09 19:27:51 
+>> adding gene annotation...			 2016-03-09 19:28:02 
+>> assigning chromosome lengths			 2016-03-09 19:28:13 
+>> done...					 2016-03-09 19:28:13 
 ```
 
 Peak annotation
@@ -1004,7 +1004,6 @@ Sources of well curated genesets include [GO consortium](http://geneontology.org
 
 Geneset enrichment testing may be performed on the sets of genes with peaks associated to them. In this example we will consider genes with peaks within 1000bp of a gene's TSS. 
 
-[link to RNA-seq GOseq]()
 
 Gene ontology and geneset testing.
 =========================================================
@@ -1164,7 +1163,7 @@ Gene ontology and functional testing. GREAT method.
 
 The results table can be retrieved using the getEnrichmentTables function and specifying which tables we wish to review.
 
-Here we retrieve the results tables for the "Pathway Data" genesets which contains 3 seperate database results.
+Here we retrieve the results tables for the "MSigDB Predicted Promoter Motifs" genesets which contains 2 seperate database results.
 
 
 ```r
