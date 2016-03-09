@@ -237,10 +237,10 @@ ChIP-seq will often show the presence of common artefacts such as ultra-high sig
 SSD is a measure of standard deviation of signal across the genome with higher scores reflecting significant pile-up of reads. SSD can therefore be used to assess both the extent of ultra high signals and the signal following removal of these blacklisted regions.
 
 For a note on known Blacklisted regions and on associated resources.
-* [Blacklisted Regions](http://mrccsc.github.io/analysisbeginings.html#/36)
+* [Blacklisted Regions](http://mrccsc.github.io/analysisbeginings.html#/35)
 
 For a note on SSD
-* [SSD and Signal Pileup](http://mrccsc.github.io/analysisbeginings.html#/37).
+* [SSD and Signal Pileup](http://mrccsc.github.io/analysisbeginings.html#/36).
 
 
 
