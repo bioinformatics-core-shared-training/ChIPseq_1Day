@@ -248,7 +248,7 @@ For a note on SSD
 Quality Control - Standardised Standard Deviation.
 ========================================================
 
-ChIPQC calculates SSD before after removing signal coming from Blacklisted regions.
+ChIPQC calculates SSD before and after removing signal coming from Blacklisted regions.
 
 The plotSSD function plots samples's pre-blacklisting score in **red** and post-blacklisting score in **blue**.
 
