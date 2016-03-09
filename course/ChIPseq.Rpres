@@ -879,14 +879,14 @@ Results files from Meme-ChIP can be found [here]()
 
 Time for an exercise
 =========================================================
-Exercise on "Identifying Motifs" can be found [here](presentations/practicals/IdentifyingMotifs_Exercises.html).
+Exercise on "Identifying Motifs" can be found [here](http://mrccsc.github.io/ChIPseq_short/course/presentations/practicals/IdentifyingMotifs_Exercises.html).
 
 Time for a solution.
 =========================================================
 
-Answers on "Identifying Motifs" can be found [here](presentations/practicals/IdentifyingMotifs__Solutions.html).
+Answers on "Identifying Motifs" can be found [here](http://mrccsc.github.io/ChIPseq_short/course/presentations/practicals/IdentifyingMotifs__Solutions.html).
 
-Rcode for "Identifying Motifs" solutions can be found [here](presentations/practicals/IdentifyingMotifs.R).
+Rcode for "Identifying Motifs" solutions can be found [here](http://mrccsc.github.io/ChIPseq_short/course/presentations/practicals/IdentifyingMotifs.R).
 
 
 Getting hold of Data
@@ -940,14 +940,14 @@ export.bed(commonPeaks,con = "consensusPeaksForIGV.bed")
 
 Time for an exercise
 =========================================================
-Exercise on "External Data and Visualisation" can be found [here](presentations/practicals/External_Data_and_Visualisation_Exercises.html).
+Exercise on "External Data and Visualisation" can be found [here](http://mrccsc.github.io/ChIPseq_short/course/presentations/practicals/External_Data_and_Visualisation_Exercises.html).
 
 Time for a solution.
 =========================================================
 
-Answers on "External Data and Visualisation" can be found [here](presentations/practicals/External_Data_and_Visualisation_Solutions.html).
+Answers on "External Data and Visualisation" can be found [here](http://mrccsc.github.io/ChIPseq_short/course/presentations/practicals/External_Data_and_Visualisation_Solutions.html).
 
-Rcode for "External Data and Visualisation" solutions can be found [here](presentations/practicals/External_Data_and_Visualisation.R).
+Rcode for "External Data and Visualisation" solutions can be found [here](http://mrccsc.github.io/ChIPseq_short/course/presentations/practicals/External_Data_and_Visualisation.R).
 
 Working with complex overlaps
 =========================================================
