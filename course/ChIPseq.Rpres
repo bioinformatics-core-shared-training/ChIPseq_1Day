@@ -796,14 +796,14 @@ great_ResultTable[["MSigDB Predicted Promoter Motifs"]][1:4,]
 
 Time for an exercise
 =========================================================
-Exercise on "Functional Annotation of peaks" can be found [here](presentations/practicals/FunctionalAnnotationOfPeaks_Exercises.html).
+Exercise on "Functional Annotation of peaks" can be found [here](http://mrccsc.github.io/ChIPseq_short/course/presentations/practicals/FunctionalAnnotationOfPeaks_Exercises.html).
 
 Time for a solution.
 =========================================================
 
-Answers on "Functional Annotation of peaks" can be found [here](presentations/practicals/FunctionalAnnotationOfPeaks_Solutions.html).
+Answers on "Functional Annotation of peaks" can be found [here](http://mrccsc.github.io/ChIPseq_short/course/presentations/practicals/FunctionalAnnotationOfPeaks_Solutions.html).
 
-Rcode for "Functional Annotation of peaks" solutions can be found [here](presentations/practicals/FunctionalAnnotationOfPeaks.R).
+Rcode for "Functional Annotation of peaks" solutions can be found [here](http://mrccsc.github.io/ChIPseq_short/course/presentations/practicals/FunctionalAnnotationOfPeaks.R).
 
 Identifying Motifs
 ==========================================================

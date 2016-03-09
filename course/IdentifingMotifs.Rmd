@@ -1,5 +1,6 @@
 ---
 title: "ChIP-seq Identifying Motifs - practical"
+author: "MRC Clinical Sciences Bioinformatics"
 output: html_document
 ---
 
