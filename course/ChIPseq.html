@@ -896,7 +896,7 @@ hljs.initHighlightingOnLoad();
 
 <p>We will cover some of the basics of quality control, working with peaks, motif identification and functional analysis. </p>
 
-<p>For more details on alignment, working with coverage and peak calling you can join us on our extended course and/or find some information <a href="linktoCourse">here</a>.</p>
+<p>For more details on alignment, working with ChIP-seq coverage and peak calling you can join us on our extended course.</p>
 
 </div>
 
@@ -975,9 +975,9 @@ hljs.initHighlightingOnLoad();
 
 <p>This data is composed of Myc chip for two cell lines, Mel and Ch12 cell lines, each with two replicates.</p>
 
-<p>Due to the short time we have together the data will be already processed from unaligned reads to called peaks. </p>
+<p>Due to the short time we have together the data has been processed from unaligned reads to called peaks. </p>
 
-<p>For full details on the analysis/processing of this data with all analysis steps covered in R/Bioconductor you can visit our course <a href="linktoCourse">here</a>.</p>
+<p>For full details on the analysis/processing of this data with all analysis steps covered in R/Bioconductor you can visit our course.</p>
 
 </div>
 
@@ -1058,8 +1058,8 @@ Practicals as an HTML page. </li>
 
 <p>or in the console.</p>
 
-<pre><code class="r">setwd(&quot;/PathToMyDownload/ChIPseq_short&quot;)
-# e.g. setwd(&quot;~/Downloads/ChIPseq_short&quot;)
+<pre><code class="r">setwd(&quot;/PathToMyDownload/ChIPseq_short/course&quot;)
+# e.g. setwd(&quot;~/Downloads/ChIPseq_short/course&quot;)
 </code></pre>
 
 </div>
@@ -1141,7 +1141,7 @@ QCmetrics(res)
 <td align="right">10792905</td>
 <td align="right">100</td>
 <td align="right">0.0e+00</td>
-<td align="right">0</td>
+<td align="right">10.20</td>
 <td align="right">36</td>
 <td align="right">176</td>
 <td align="right">1.030</td>
@@ -1154,7 +1154,7 @@ QCmetrics(res)
 <td align="right">9880785</td>
 <td align="right">100</td>
 <td align="right">0.0e+00</td>
-<td align="right">0</td>
+<td align="right">9.98</td>
 <td align="right">36</td>
 <td align="right">146</td>
 <td align="right">1.370</td>
@@ -1167,7 +1167,7 @@ QCmetrics(res)
 <td align="right">9912979</td>
 <td align="right">100</td>
 <td align="right">0.0e+00</td>
-<td align="right">0</td>
+<td align="right">9.70</td>
 <td align="right">35</td>
 <td align="right">169</td>
 <td align="right">1.150</td>
@@ -1180,7 +1180,7 @@ QCmetrics(res)
 <td align="right">10475318</td>
 <td align="right">100</td>
 <td align="right">0.0e+00</td>
-<td align="right">0</td>
+<td align="right">9.71</td>
 <td align="right">35</td>
 <td align="right">161</td>
 <td align="right">0.973</td>
@@ -1193,7 +1193,7 @@ QCmetrics(res)
 <td align="right">15907271</td>
 <td align="right">100</td>
 <td align="right">6.3e-06</td>
-<td align="right">0</td>
+<td align="right">6.85</td>
 <td align="right">36</td>
 <td align="right">180</td>
 <td align="right">0.744</td>
@@ -1206,7 +1206,7 @@ QCmetrics(res)
 <td align="right">18437914</td>
 <td align="right">100</td>
 <td align="right">0.0e+00</td>
-<td align="right">0</td>
+<td align="right">5.65</td>
 <td align="right">35</td>
 <td align="right">173</td>
 <td align="right">0.444</td>
@@ -1957,13 +1957,13 @@ commonPeaks[1:2, ]
     annoDb = &quot;org.Mm.eg.db&quot;)
 </code></pre>
 
-<pre><code>&gt;&gt; preparing features information...         2016-03-06 16:43:09 
-&gt;&gt; identifying nearest features...       2016-03-06 16:43:09 
-&gt;&gt; calculating distance from peak to TSS...  2016-03-06 16:43:10 
-&gt;&gt; assigning genomic annotation...       2016-03-06 16:43:10 
-&gt;&gt; adding gene annotation...             2016-03-06 16:43:20 
-&gt;&gt; assigning chromosome lengths          2016-03-06 16:43:30 
-&gt;&gt; done...                   2016-03-06 16:43:30 
+<pre><code>&gt;&gt; preparing features information...         2016-03-09 18:38:42 
+&gt;&gt; identifying nearest features...       2016-03-09 18:38:43 
+&gt;&gt; calculating distance from peak to TSS...  2016-03-09 18:38:44 
+&gt;&gt; assigning genomic annotation...       2016-03-09 18:38:44 
+&gt;&gt; adding gene annotation...             2016-03-09 18:38:53 
+&gt;&gt; assigning chromosome lengths          2016-03-09 18:39:03 
+&gt;&gt; done...                   2016-03-09 18:39:03 
 </code></pre>
 
 </div>

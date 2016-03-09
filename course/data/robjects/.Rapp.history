@@ -1,1 +1,3 @@
 load("/Users/tcarroll/chipseqcourseNew/robjects/namedChIPQCsampleResults.RData")
+load("/Users/Ziwei/Downloads/tommy/ChIPseq_short/course/data/robjects/ChIPQCwithPeaks.RData")
+load("/Users/Ziwei/Downloads/tommy/ChIPseq_short/course/data/robjects/ChIPQCwithPeaks.RData")

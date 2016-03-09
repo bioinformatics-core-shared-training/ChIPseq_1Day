@@ -23,7 +23,7 @@ In this course we will use a few of the packages from the comprehensive reposito
 
 We will cover some of the basics of quality control, working with peaks, motif identification and functional analysis. 
 
-For more details on alignment, working with coverage and peak calling you can join us on our extended course and/or find some information [here](linktoCourse).
+For more details on alignment, working with ChIP-seq coverage and peak calling you can join us on our extended course.
 
 ========================================================
 
@@ -79,9 +79,9 @@ In this course we will use some of the Encode data for Myc ChIP-seq in mouse ali
 
 This data is composed of Myc chip for two cell lines, Mel and Ch12 cell lines, each with two replicates.
 
-Due to the short time we have together the data will be already processed from unaligned reads to called peaks. 
+Due to the short time we have together the data has been processed from unaligned reads to called peaks. 
 
-For full details on the analysis/processing of this data with all analysis steps covered in R/Bioconductor you can visit our course [here](linktoCourse).
+For full details on the analysis/processing of this data with all analysis steps covered in R/Bioconductor you can visit our course.
 
 Materials.
 ========================================================
@@ -137,9 +137,10 @@ or in the console.
 
 
 ```r
-setwd("/PathToMyDownload/ChIPseq_short")
-# e.g. setwd("~/Downloads/ChIPseq_short")
+setwd("/PathToMyDownload/ChIPseq_short/course")
+# e.g. setwd("~/Downloads/ChIPseq_short/course")
 ```
+
 
 Working With ChIP-seq data in R
 ========================================================
@@ -192,14 +193,14 @@ QCmetrics(res)
 
 
 
-|           |    Reads| Map%|   Filt%| Dup%| ReadL| FragL| RelCC|  SSD| RiP%| RiBL%|
-|:----------|--------:|----:|-------:|----:|-----:|-----:|-----:|----:|----:|-----:|
-|myc_ch12_1 | 10792905|  100| 0.0e+00|    0|    36|   176| 1.030| 5.22| 14.0|  13.9|
-|myc_ch12_2 |  9880785|  100| 0.0e+00|    0|    36|   146| 1.370| 3.94| 19.5|  11.1|
-|myc_Mel_1  |  9912979|  100| 0.0e+00|    0|    35|   169| 1.150| 4.57| 23.1|  13.0|
-|myc_Mel_2  | 10475318|  100| 0.0e+00|    0|    35|   161| 0.973| 5.54| 21.7|  15.3|
-|ch12       | 15907271|  100| 6.3e-06|    0|    36|   180| 0.744| 7.76|   NA|  16.2|
-|MEL        | 18437914|  100| 0.0e+00|    0|    35|   173| 0.444| 8.61|   NA|  17.1|
+|           |    Reads| Map%|   Filt%|  Dup%| ReadL| FragL| RelCC|  SSD| RiP%| RiBL%|
+|:----------|--------:|----:|-------:|-----:|-----:|-----:|-----:|----:|----:|-----:|
+|myc_ch12_1 | 10792905|  100| 0.0e+00| 10.20|    36|   176| 1.030| 5.22| 14.0|  13.9|
+|myc_ch12_2 |  9880785|  100| 0.0e+00|  9.98|    36|   146| 1.370| 3.94| 19.5|  11.1|
+|myc_Mel_1  |  9912979|  100| 0.0e+00|  9.70|    35|   169| 1.150| 4.57| 23.1|  13.0|
+|myc_Mel_2  | 10475318|  100| 0.0e+00|  9.71|    35|   161| 0.973| 5.54| 21.7|  15.3|
+|ch12       | 15907271|  100| 6.3e-06|  6.85|    36|   180| 0.744| 7.76|   NA|  16.2|
+|MEL        | 18437914|  100| 0.0e+00|  5.65|    35|   173| 0.444| 8.61|   NA|  17.1|
 
 
 
@@ -658,7 +659,7 @@ length(firstANDsecondPeakSets)
 Manipulating Peak Sets - Accessing data in GRanges metadata columns
 =========================================================
 
-Data in GRanges metadata columns may be accessed just as data.frame columns [link](link to link).
+Data in GRanges metadata columns may be accessed just as data.frame columns.
 
 To access the fold_enrichment or abs_summit columns we can use the following syntax
 
@@ -867,13 +868,13 @@ peakAnno <- annotatePeak(commonPeaks, tssRegion = c(-1000, 1000), TxDb = TxDb.Mm
 ```
 
 ```
->> preparing features information...		 2016-03-06 16:43:09 
->> identifying nearest features...		 2016-03-06 16:43:09 
->> calculating distance from peak to TSS...	 2016-03-06 16:43:10 
->> assigning genomic annotation...		 2016-03-06 16:43:10 
->> adding gene annotation...			 2016-03-06 16:43:20 
->> assigning chromosome lengths			 2016-03-06 16:43:30 
->> done...					 2016-03-06 16:43:30 
+>> preparing features information...		 2016-03-09 18:54:10 
+>> identifying nearest features...		 2016-03-09 18:54:10 
+>> calculating distance from peak to TSS...	 2016-03-09 18:54:11 
+>> assigning genomic annotation...		 2016-03-09 18:54:11 
+>> adding gene annotation...			 2016-03-09 18:54:21 
+>> assigning chromosome lengths			 2016-03-09 18:54:31 
+>> done...					 2016-03-09 18:54:31 
 ```
 
 Peak annotation
