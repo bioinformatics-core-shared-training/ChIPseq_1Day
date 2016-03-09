@@ -1,4 +1,4 @@
-ChIP-seq Intro 
+ChIP-seq 
 ========================================================
 author:MRC CSC Bioinformatics Core
 date:http://mrccsc.github.io/ChIPseq_short/
@@ -885,13 +885,13 @@ peakAnno <- annotatePeak(commonPeaks, tssRegion = c(-1000, 1000), TxDb = TxDb.Mm
 ```
 
 ```
->> preparing features information...		 2016-03-09 22:04:18 
->> identifying nearest features...		 2016-03-09 22:04:18 
->> calculating distance from peak to TSS...	 2016-03-09 22:04:19 
->> assigning genomic annotation...		 2016-03-09 22:04:19 
->> adding gene annotation...			 2016-03-09 22:04:30 
->> assigning chromosome lengths			 2016-03-09 22:04:42 
->> done...					 2016-03-09 22:04:42 
+>> preparing features information...		 2016-03-09 23:05:27 
+>> identifying nearest features...		 2016-03-09 23:05:28 
+>> calculating distance from peak to TSS...	 2016-03-09 23:05:28 
+>> assigning genomic annotation...		 2016-03-09 23:05:28 
+>> adding gene annotation...			 2016-03-09 23:05:38 
+>> assigning chromosome lengths			 2016-03-09 23:05:49 
+>> done...					 2016-03-09 23:05:49 
 ```
 
 Peak annotation
@@ -1452,9 +1452,11 @@ In these cases it is possible to install into and use a library from a local dir
 
 ```r
 # Something like this
-install.packages("C:/Users/tcarroll/Desktop/BSgenome.Mmusculus.UCSC.mm10_1.4.0.tar.gz", lib="C:/Users/tcarroll/Desktop/Rlibs", repos = NULL, type = "source")
+install.packages( "C:/Users/MYUSERNAME/Desktop/BSgenome.Mmusculus.UCSC.mm10_1.4.0.tar.gz", lib="C:/Users/MYUSERNAME/Desktop/Rlibs", repos = NULL, type = "source"
+                  )
 
-library(BSgenome.Mmusculus.UCSC.mm10,lib.loc = "C:/Users/tcarroll/Desktop/Rlibs")
+library(BSgenome.Mmusculus.UCSC.mm10, lib.loc="C:/Users/tcarroll/MYUSERNAME/Rlibs"
+        )
 ```
 
 

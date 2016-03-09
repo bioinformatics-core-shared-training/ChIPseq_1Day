@@ -1,4 +1,4 @@
-ChIP-seq Intro 
+ChIP-seq 
 ========================================================
 author:MRC CSC Bioinformatics Core
 date:http://mrccsc.github.io/ChIPseq_short/
@@ -973,9 +973,11 @@ In these cases it is possible to install into and use a library from a local dir
 
 ```{r,eval=F,echo=T,cache=T}
 # Something like this
-install.packages("C:/Users/tcarroll/Desktop/BSgenome.Mmusculus.UCSC.mm10_1.4.0.tar.gz", lib="C:/Users/tcarroll/Desktop/Rlibs", repos = NULL, type = "source")
+install.packages( "C:/Users/MYUSERNAME/Desktop/BSgenome.Mmusculus.UCSC.mm10_1.4.0.tar.gz", lib="C:/Users/MYUSERNAME/Desktop/Rlibs", repos = NULL, type = "source"
+                  )
 
-library(BSgenome.Mmusculus.UCSC.mm10,lib.loc = "C:/Users/tcarroll/Desktop/Rlibs")
+library(BSgenome.Mmusculus.UCSC.mm10, lib.loc="C:/Users/tcarroll/MYUSERNAME/Rlibs"
+        )
 ```
 
 

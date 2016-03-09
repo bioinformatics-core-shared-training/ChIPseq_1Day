@@ -1,6 +1,6 @@
 ## ----eval=F--------------------------------------------------------------
-## setwd("/PathToMyDownload/ChIPseq_short")
-## # e.g. setwd("~/Downloads/ChIPseq_short")
+## setwd("/PathToMyDownload/ChIPseq_short/course")
+## # e.g. setwd("~/Downloads/ChIPseq_short/course")
 
 ## ----eval=F--------------------------------------------------------------
 ## QCresult <- ChIPQCsample(reads="/pathTo/myChIPreads.bam",
@@ -126,6 +126,10 @@ length(allPeaksReduced)
 commonPeaks <- allPeaksReduced[allPeaksReduced %over% firstPeakSet 
                                & allPeaksReduced %over% secondPeakSet]
 length(commonPeaks)
+
+## ----eval=F--------------------------------------------------------------
+## source("https://bioconductor.org/biocLite.R")
+## biocLite("rGREAT")
 
 ## ----eval=T,echo=T, eval=T, echo=T, warning=FALSE,tidy=T-----------------
 library(TxDb.Mmusculus.UCSC.mm9.knownGene)
@@ -264,6 +268,14 @@ cmycAnnoHub[1:3,]
 ## library(rtracklayer)
 ## export.bed(commonPeaks,con = "consensusPeaksForIGV.bed")
 ## 
+
+## ----eval=F,echo=T,cache=T-----------------------------------------------
+## # Something like this
+## install.packages( "C:/Users/MYUSERNAME/Desktop/BSgenome.Mmusculus.UCSC.mm10_1.4.0.tar.gz", lib="C:/Users/MYUSERNAME/Desktop/Rlibs", repos = NULL, type = "source"
+##                   )
+## 
+## library(BSgenome.Mmusculus.UCSC.mm10, lib.loc="C:/Users/tcarroll/MYUSERNAME/Rlibs"
+##         )
 
 ## ---- echo=TRUE,collapse=F-----------------------------------------------
 listOfPeaks <- GRangesList(lapply(macsPeaksFiles,
