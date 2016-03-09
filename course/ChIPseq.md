@@ -258,10 +258,10 @@ ChIP-seq will often show the presence of common artefacts such as ultra-high sig
 SSD is a measure of standard deviation of signal across the genome with higher scores reflecting significant pile-up of reads. SSD can therefore be used to assess both the extent of ultra high signals and the signal following removal of these blacklisted regions.
 
 For a note on known Blacklisted regions and on associated resources.
-* [Blacklisted Regions](http://mrccsc.github.io/analysisbeginings.html#/36)
+* [Blacklisted Regions](http://mrccsc.github.io/analysisbeginings.html#/35)
 
 For a note on SSD
-* [SSD and Signal Pileup](http://mrccsc.github.io/analysisbeginings.html#/37).
+* [SSD and Signal Pileup](http://mrccsc.github.io/analysisbeginings.html#/36).
 
 
 
@@ -868,13 +868,13 @@ peakAnno <- annotatePeak(commonPeaks, tssRegion = c(-1000, 1000), TxDb = TxDb.Mm
 ```
 
 ```
->> preparing features information...		 2016-03-09 19:27:50 
->> identifying nearest features...		 2016-03-09 19:27:50 
->> calculating distance from peak to TSS...	 2016-03-09 19:27:51 
->> assigning genomic annotation...		 2016-03-09 19:27:51 
->> adding gene annotation...			 2016-03-09 19:28:02 
->> assigning chromosome lengths			 2016-03-09 19:28:13 
->> done...					 2016-03-09 19:28:13 
+>> preparing features information...		 2016-03-09 20:17:06 
+>> identifying nearest features...		 2016-03-09 20:17:07 
+>> calculating distance from peak to TSS...	 2016-03-09 20:17:08 
+>> assigning genomic annotation...		 2016-03-09 20:17:08 
+>> adding gene annotation...			 2016-03-09 20:17:19 
+>> assigning chromosome lengths			 2016-03-09 20:17:31 
+>> done...					 2016-03-09 20:17:31 
 ```
 
 Peak annotation
