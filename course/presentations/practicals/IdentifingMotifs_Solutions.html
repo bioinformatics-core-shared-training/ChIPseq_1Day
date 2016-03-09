@@ -214,9 +214,11 @@ top500_melRep1_1And2_Resized_Seq[1:4,]
 
 writeXStringSet(top500_melRep1_1And2_Resized_Seq,file=&quot;top500_melRep1_1And2.fa&quot;)</code></pre>
 <ul>
-<li><p>Upload the sequences to Meme-ChIP and review the results when complete.</p></li>
-<li><p>Bonus question - <strong>Recentre top 500 peaks around their absolute summit</strong>, resize to 200, extract sequences and submit to Meme-ChIP. Compare results between peaksets.</p></li>
+<li>Upload the sequences to Meme-ChIP and review the results when complete.</li>
 </ul>
+<p><strong>Once you have uploaded the data you can preview the results <a href="http://mrccsc.github.io/appMEMECHIP_4.11.11457523923197-718963456/meme-chip.html">here</a></strong></p>
+<p>** Bonus question - <strong>Recentre top 500 peaks around their absolute summit</strong>, resize to 200, extract sequences and submit to Meme-ChIP. Compare results between peaksets.</p>
+<p><strong>Once you have uploaded the data you can preview the results <a href="http://mrccsc.github.io/appMEMECHIP_4.11.114575239877311434368117/meme-chip.html">here</a></strong></p>
 <pre class="r"><code>
 start(top500_melRep1_Rep1AndRep2) &lt;- end(top500_melRep1_Rep1AndRep2) &lt;- top500_melRep1_Rep1AndRep2$abs_summit
 top500_melRep1_1And2_Resized &lt;- resize(top500_melRep1_Rep1AndRep2,200,fix = &quot;center&quot;)
