@@ -157,6 +157,24 @@ ChIP-seq has many sources of potential noise including
 
 Many of these sources of noise can be assessed using some now well-established methodology.
 
+Quality Control. - Some references
+========================================================
+
+For some discussions:
+
+* Encode quality metrics.
+
+[Large-scale quality analysis of published ChIP-seq data. Marinov GK, Kundaje A, Park PJ, Wold BJ. G3 (Bethesda). 2014 Feb 19;4(2)](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3931556/)
+
+* Overestimation of artefact duplicates in ChIPseq.
+
+[Systematic evaluation of factors influencing ChIP-seq fidelity.Nat Methods. Chen Y, Negre N, Li Q, Mieczkowska JO, Slattery M, Liu T, Zhang Y, Kim TK, He HH, Zieba J, Ruan Y, Bickel PJ, Myers RM, Wold BJ, White KP, Lieb JD, Liu XS. 2012 Jun;9(6)](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3477507/)
+
+
+* When and what QC is useful.
+
+[Impact of artifact removal on ChIP quality metrics in ChIP-seq and ChIP-exo data.Front Genet. 2014 Apr 10;5:75.Carroll TS, Liang Z, Salama R, Stark R, de Santiago I](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3989762/)
+
 Quality Control - Quality metrics for ChIP-seq.
 ========================================================
 
