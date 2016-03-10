@@ -158,6 +158,24 @@ ChIP-seq has many sources of potential noise including
 
 Many of these sources of noise can be assessed using some now well-established methodology.
 
+Quality Control. - Some references
+========================================================
+
+For some discussions:
+
+* Encode quality metrics.
+
+[Large-scale quality analysis of published ChIP-seq data. Marinov GK, Kundaje A, Park PJ, Wold BJ. G3 (Bethesda). 2014 Feb 19;4(2)](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3931556/)
+
+* Overestimation of artefact duplicates in ChIPseq.
+
+[Systematic evaluation of factors influencing ChIP-seq fidelity.Nat Methods. Chen Y, Negre N, Li Q, Mieczkowska JO, Slattery M, Liu T, Zhang Y, Kim TK, He HH, Zieba J, Ruan Y, Bickel PJ, Myers RM, Wold BJ, White KP, Lieb JD, Liu XS. 2012 Jun;9(6)](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3477507/)
+
+
+* When and what QC is useful.
+
+[Impact of artifact removal on ChIP quality metrics in ChIP-seq and ChIP-exo data.Front Genet. 2014 Apr 10;5:75.Carroll TS, Liang Z, Salama R, Stark R, de Santiago I](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3989762/)
+
 Quality Control - Quality metrics for ChIP-seq.
 ========================================================
 
@@ -233,8 +251,31 @@ The prediction of fragment length is an essential part of ChIP-seq affecting pea
 
 The use of cross-correlation or cross-coverage allows for an assessment of reads clustering by strand and so a measure of quality. 
 
-For more details on the use of cross-coverage in the assessment of ChIP-seq quality and identification of fragment length you can see our note here
-* [ChIP-seq cross-coverage/cross-correlation](http://mrccsc.github.io/analysisbeginings.html#/37).
+Quality Control (Assessing fragment length)
+========================================================
+<div align="center">
+<img src="imgs/ChIP-seq_biology_slides.png" alt="offset" height="900" width="1400">
+</div>
+
+
+Quality Control (Assessing fragment length)
+========================================================
+<div align="center">
+<img src="imgs/pileup.png" alt="offset" height="900" width="900">
+</div>
+
+Quality Control (Assessing fragment length)
+========================================================
+<div align="center">
+<img src="imgs/offset.jpg" alt="offset" height="900" width="900">
+</div>
+
+Quality Control (Assessing fragment length)
+========================================================
+<div align="center">
+<img src="imgs/shifts.jpg" alt="offset" height="900" width="1300">
+</div>
+
 
 Quality Control (Assessing fragment length)
 ========================================================
@@ -885,13 +926,13 @@ peakAnno <- annotatePeak(commonPeaks, tssRegion = c(-1000, 1000), TxDb = TxDb.Mm
 ```
 
 ```
->> preparing features information...		 2016-03-10 00:33:18 
->> identifying nearest features...		 2016-03-10 00:33:19 
->> calculating distance from peak to TSS...	 2016-03-10 00:33:19 
->> assigning genomic annotation...		 2016-03-10 00:33:19 
->> adding gene annotation...			 2016-03-10 00:33:30 
->> assigning chromosome lengths			 2016-03-10 00:33:41 
->> done...					 2016-03-10 00:33:41 
+>> preparing features information...		 2016-03-10 11:25:31 
+>> identifying nearest features...		 2016-03-10 11:25:32 
+>> calculating distance from peak to TSS...	 2016-03-10 11:25:32 
+>> assigning genomic annotation...		 2016-03-10 11:25:32 
+>> adding gene annotation...			 2016-03-10 11:25:42 
+>> assigning chromosome lengths			 2016-03-10 11:25:52 
+>> done...					 2016-03-10 11:25:52 
 ```
 
 Peak annotation
