@@ -251,8 +251,31 @@ The prediction of fragment length is an essential part of ChIP-seq affecting pea
 
 The use of cross-correlation or cross-coverage allows for an assessment of reads clustering by strand and so a measure of quality. 
 
-For more details on the use of cross-coverage in the assessment of ChIP-seq quality and identification of fragment length you can see our note here
-* [ChIP-seq cross-coverage/cross-correlation](http://mrccsc.github.io/analysisbeginings.html#/37).
+Quality Control (Assessing fragment length)
+========================================================
+<div align="center">
+<img src="imgs/ChIP-seq_biology_slides.png" alt="offset" height="900" width="1400">
+</div>
+
+
+Quality Control (Assessing fragment length)
+========================================================
+<div align="center">
+<img src="imgs/pileup.png" alt="offset" height="900" width="900">
+</div>
+
+Quality Control (Assessing fragment length)
+========================================================
+<div align="center">
+<img src="imgs/offset.jpg" alt="offset" height="900" width="900">
+</div>
+
+Quality Control (Assessing fragment length)
+========================================================
+<div align="center">
+<img src="imgs/shifts.jpg" alt="offset" height="900" width="1300">
+</div>
+
 
 Quality Control (Assessing fragment length)
 ========================================================
@@ -903,13 +926,13 @@ peakAnno <- annotatePeak(commonPeaks, tssRegion = c(-1000, 1000), TxDb = TxDb.Mm
 ```
 
 ```
->> preparing features information...		 2016-03-10 10:41:23 
->> identifying nearest features...		 2016-03-10 10:41:23 
->> calculating distance from peak to TSS...	 2016-03-10 10:41:24 
->> assigning genomic annotation...		 2016-03-10 10:41:24 
->> adding gene annotation...			 2016-03-10 10:41:34 
->> assigning chromosome lengths			 2016-03-10 10:41:46 
->> done...					 2016-03-10 10:41:46 
+>> preparing features information...		 2016-03-10 11:25:31 
+>> identifying nearest features...		 2016-03-10 11:25:32 
+>> calculating distance from peak to TSS...	 2016-03-10 11:25:32 
+>> assigning genomic annotation...		 2016-03-10 11:25:32 
+>> adding gene annotation...			 2016-03-10 11:25:42 
+>> assigning chromosome lengths			 2016-03-10 11:25:52 
+>> done...					 2016-03-10 11:25:52 
 ```
 
 Peak annotation
