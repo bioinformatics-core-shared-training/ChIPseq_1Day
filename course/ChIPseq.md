@@ -257,6 +257,17 @@ Quality Control (Assessing fragment length)
 <img src="imgs/ChIP-seq_biology_slides.png" alt="offset" height="900" width="1400">
 </div>
 
+Quality Control (Assessing fragment length)
+========================================================
+* In ChIP-seq typically short single end reads of dsDNA.
+
+* **dsDNA single end sequencing means**
++ 5' will be sequenced on "+" strand
++ 3' end will be on "-" strand.
+
+* **Although we only have partial sequence of strand, with predicted fragment length.**
++ "+" reads should extend only in positive direction 
++ "-" reads only in negative
 
 Quality Control (Assessing fragment length)
 ========================================================
@@ -926,13 +937,13 @@ peakAnno <- annotatePeak(commonPeaks, tssRegion = c(-1000, 1000), TxDb = TxDb.Mm
 ```
 
 ```
->> preparing features information...		 2016-03-10 11:25:31 
->> identifying nearest features...		 2016-03-10 11:25:32 
->> calculating distance from peak to TSS...	 2016-03-10 11:25:32 
->> assigning genomic annotation...		 2016-03-10 11:25:32 
->> adding gene annotation...			 2016-03-10 11:25:42 
->> assigning chromosome lengths			 2016-03-10 11:25:52 
->> done...					 2016-03-10 11:25:52 
+>> preparing features information...		 2016-03-10 11:54:28 
+>> identifying nearest features...		 2016-03-10 11:54:29 
+>> calculating distance from peak to TSS...	 2016-03-10 11:54:29 
+>> assigning genomic annotation...		 2016-03-10 11:54:29 
+>> adding gene annotation...			 2016-03-10 11:54:38 
+>> assigning chromosome lengths			 2016-03-10 11:54:48 
+>> done...					 2016-03-10 11:54:48 
 ```
 
 Peak annotation
@@ -1828,6 +1839,150 @@ GRanges object with 15826 ranges and 6 metadata columns:
   [15826]  2.7349368097894e-08 1.94110300146698e-07
   -------
   seqinfo: 22 sequences from an unspecified genome; no seqlengths
+```
+
+Session Information
+=========================================================
+
+
+```r
+sessionInfo()
+```
+
+```
+R version 3.2.3 (2015-12-10)
+Platform: x86_64-apple-darwin13.4.0 (64-bit)
+Running under: OS X 10.11.3 (El Capitan)
+
+locale:
+[1] en_GB.UTF-8/en_GB.UTF-8/en_GB.UTF-8/C/en_GB.UTF-8/en_GB.UTF-8
+
+attached base packages:
+[1] stats4    parallel  stats     graphics  grDevices utils     datasets 
+[8] methods   base     
+
+other attached packages:
+ [1] BSgenome.Mmusculus.UCSC.mm9_1.4.0      
+ [2] BSgenome_1.38.0                        
+ [3] rtracklayer_1.30.2                     
+ [4] rGREAT_1.2.0                           
+ [5] goseq_1.22.0                           
+ [6] geneLenDataBase_1.6.0                  
+ [7] BiasedUrn_1.07                         
+ [8] KEGG.db_3.2.2                          
+ [9] ChIPseeker_1.6.6                       
+[10] org.Mm.eg.db_3.2.3                     
+[11] TxDb.Mmusculus.UCSC.mm9.knownGene_3.2.2
+[12] GenomicFeatures_1.22.13                
+[13] AnnotationDbi_1.32.3                   
+[14] DESeq2_1.10.1                          
+[15] RcppArmadillo_0.6.500.4.0              
+[16] Rcpp_0.12.3                            
+[17] ChIPQC_1.6.1                           
+[18] DiffBind_1.16.3                        
+[19] RSQLite_1.0.0                          
+[20] DBI_0.3.1                              
+[21] locfit_1.5-9.1                         
+[22] GenomicAlignments_1.6.3                
+[23] Rsamtools_1.22.0                       
+[24] Biostrings_2.38.4                      
+[25] XVector_0.10.0                         
+[26] limma_3.26.8                           
+[27] SummarizedExperiment_1.0.2             
+[28] Biobase_2.30.0                         
+[29] GenomicRanges_1.22.4                   
+[30] GenomeInfoDb_1.6.3                     
+[31] IRanges_2.4.7                          
+[32] S4Vectors_0.8.11                       
+[33] BiocGenerics_0.16.1                    
+[34] ggplot2_2.0.0                          
+[35] knitr_1.12.3                           
+
+loaded via a namespace (and not attached):
+ [1] amap_0.8-14                            
+ [2] colorspace_1.2-6                       
+ [3] rjson_0.2.15                           
+ [4] hwriter_1.3.2                          
+ [5] futile.logger_1.4.1                    
+ [6] GlobalOptions_0.0.8                    
+ [7] base64enc_0.1-3                        
+ [8] splines_3.2.3                          
+ [9] fail_1.3                               
+[10] geneplotter_1.48.0                     
+[11] Formula_1.2-1                          
+[12] Nozzle.R1_1.1-1                        
+[13] gridBase_0.4-7                         
+[14] annotate_1.48.0                        
+[15] cluster_2.0.3                          
+[16] GO.db_3.2.2                            
+[17] pheatmap_1.0.8                         
+[18] graph_1.48.0                           
+[19] GOstats_2.36.0                         
+[20] assertthat_0.1                         
+[21] Matrix_1.2-3                           
+[22] lazyeval_0.1.10                        
+[23] TxDb.Hsapiens.UCSC.hg19.knownGene_3.2.2
+[24] formatR_1.2.1                          
+[25] acepack_1.3-3.3                        
+[26] tools_3.2.3                            
+[27] gtable_0.1.2                           
+[28] Category_2.36.0                        
+[29] reshape2_1.4.1                         
+[30] systemPipeR_1.4.8                      
+[31] dplyr_0.4.3                            
+[32] ShortRead_1.28.0                       
+[33] gdata_2.17.0                           
+[34] nlme_3.1-122                           
+[35] stringr_1.0.0                          
+[36] gtools_3.5.0                           
+[37] XML_3.98-1.3                           
+[38] edgeR_3.12.0                           
+[39] zlibbioc_1.16.0                        
+[40] scales_0.3.0                           
+[41] RBGL_1.46.0                            
+[42] lambda.r_1.1.7                         
+[43] RColorBrewer_1.1-2                     
+[44] BBmisc_1.9                             
+[45] gridExtra_2.0.0                        
+[46] UpSetR_1.1.0                           
+[47] biomaRt_2.26.1                         
+[48] rpart_4.1-10                           
+[49] latticeExtra_0.6-28                    
+[50] stringi_1.0-1                          
+[51] highr_0.5.1                            
+[52] genefilter_1.52.1                      
+[53] plotrix_3.6-1                          
+[54] checkmate_1.7.1                        
+[55] caTools_1.17.1                         
+[56] boot_1.3-17                            
+[57] BiocParallel_1.4.3                     
+[58] chipseq_1.20.0                         
+[59] BatchJobs_1.6                          
+[60] bitops_1.0-6                           
+[61] evaluate_0.8                           
+[62] lattice_0.20-33                        
+[63] labeling_0.3                           
+[64] GSEABase_1.32.0                        
+[65] AnnotationForge_1.12.2                 
+[66] plyr_1.8.3                             
+[67] magrittr_1.5                           
+[68] sendmailR_1.2-1                        
+[69] R6_2.1.2                               
+[70] gplots_2.17.0                          
+[71] Hmisc_3.17-2                           
+[72] foreign_0.8-66                         
+[73] mgcv_1.8-9                             
+[74] survival_2.38-3                        
+[75] RCurl_1.95-4.7                         
+[76] nnet_7.3-11                            
+[77] futile.options_1.0.0                   
+[78] KernSmooth_2.23-15                     
+[79] GetoptLong_0.1.1                       
+[80] grid_3.2.3                             
+[81] digest_0.6.9                           
+[82] xtable_1.8-2                           
+[83] brew_1.0-6                             
+[84] munsell_0.4.3                          
 ```
 
 THE END!

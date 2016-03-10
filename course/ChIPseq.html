@@ -1288,6 +1288,22 @@ QCmetrics(res)
 <section data-transition="linear" data-transition-speed="default">
 <h3>Quality Control (Assessing fragment length)</h3>
 <div class="slideContent" >
+<ul>
+<li><p>In ChIP-seq typically short single end reads of dsDNA.</p></li>
+<li><p><strong>dsDNA single end sequencing means</strong></p></li>
+<li><p>5&#39; will be sequenced on &ldquo;+&rdquo; strand</p></li>
+<li><p>3&#39; end will be on &ldquo;-&rdquo; strand.</p></li>
+<li><p><strong>Although we only have partial sequence of strand, with predicted fragment length.</strong></p></li>
+<li><p>&ldquo;+&rdquo; reads should extend only in positive direction </p></li>
+<li><p>&ldquo;-&rdquo; reads only in negative</p></li>
+</ul>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Quality Control (Assessing fragment length)</h3>
+<div class="slideContent" >
 <div align="center">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAeIAAALnCAMAAABiErS/AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAjFQTFRF////AAAAAAAAAAAAQERJEhISGRkZTVZeRElPAAAAAAAAOT1AR01TKiosMjQ3Oz5CAAAAMjQ3GxsbFBQVLCwuFhYXHR0eHR0eISEiJiYnODs9OT1ANjk7P0NIRUtRP0NIMTI0T1hhRElPAAAASlJZRUtRQkZLSVFYMzExKioqJCQlLS0uMzM1SUE+S0tNRUpES1JKAAAAAAAAAAAAGxsbJCQlFhYXFhYXAAAAAAAAAAAAPj5ATExOV1dZNTU3S1JLEBAQFBQVWFhaUFBSS09LTlROLi4tKCgoHx8gAAAASkE9VklEAAAAISEiRUhFTFBLAAAASUA9AAAAISEiHx8gSkNAQDs5UlJUQENAQ0hDSEpKR0tHAAAARD48V0lDU0ZBUUQ/NzMxV05KYGFjWltdSEhKISEiR0dJPj5ARktFQkdCOTw5VkhCNTEwTUI+SkE9LCsqLSwrSlFKMzQyKCcnKCcoKikpMy8uSUA8MzQyRUpEPjg1UFpjY4SbXZ7EQq/jYZi6W216T6nYX3WGAAAAY4ulZJKwV6TOYXyQmVxFu1k6x8jKn6Gk6T0k////UltQbb5FaIFck5WYfH1/PkI+UUdDYlNNNTY0VFVXYmNlRUVHOTo4X29ZVl1VcaFXRz87U0ZBYU5GISEiTERANzMyGxsbEhISYl5dV1RTRDw5Wl9aRkpFSU9ISUxKMzQyXmFgYlhUVEdCj1tHh4mM1NXWkoaA4eLjbGRia4ldPDY0Rz47emHsPgAAAHx0Uk5TACBAULj4+/e+YBCQ/HnU/TBq/PnQ+v3s7vD72LLJ+aXl+5iAoKzg79r29tCe++CYoJDAoNXZyPNYcErY8+/3/ubooKzZ3H3c2WT+/kzM7/SI/lf17PL6dP3+yNU8/aCyuHn5+/O4iNyQrODY7/eY89DQ7/fc/tae4GpM2EuCszYAAAABYktHRACIBR1IAAAACXBIWXMAAAsTAAALEwEAmpwYAAALE0lEQVR42u3dCXsdVR3AYTJ10iZdcrshm2CNgrXSFlS00lIEUcrivi+4b4hSFhU1yb1NJl0SaEhbxWCtDYiK4lZ3P53g8jxAm5t7pweYc877foCmPb/mJnPmP2cuuCBHA8VzBrL8t+dgxavKwZVjY2MrB8tVQ5YjOcOryzXjE+3/mhhfU64etihJWVuOddrP1xkr11qWhL6F1428MPB/Io+s80M5Fa3ywGT7bJNTZcviJGF9Nd0+t+lqveVJofCGTnspnQ0ap1B4or20CY2j19o43e7m4MaWRYracDne7m66dIEctU0H2ss5sMkyRWztyOSyiSdH7IHEa2Bzp728zmZbINHaNNXuxZSP6lgVF072lHjywhUWK06vnm73ZvoiixWl9SPtXo3YAInSRdM9J56+2HJFaOiSdu8uMQYSoUun+0g8fakFi05rw2QfidsbWpYsNpdN9VO4PXWZJYtNOdFX4kOlJYvMijXt/qzxC1dkVo33mXj8NRYtLhsP9Zn4UGXRorLi8na/LrdRHZUrpvpOPHWFZYvJazt9J+64FxGT4ardv8pkQERWbKmReIsfxhF53eEaiQ/7YRyRSw/WSHzQrYiIlIdqJHZlHJGBwXYdg37fikaxpVbiLYWli8XogVqJp0YtXSxef7hW4sNvsHSx2HSwVuKDRuajcWWnVuLOlZYuFrWumVw1xaRq1yOxxDTEcN3E9j5iUVxVM/FV9j4kRmIkRmIkRmKJJY6frY/02cCUWOLY1byZOClxNIwEJM9gT/KM5yXPkG3yjMonzwMv6fPYWvI8fJo8j5Anz0EQyXOcS/ocypQ8R6slzwGJ6XPMafIcVpw8R46nz4sDkuf1H8nzEp/0eRVX8rxQL31ei5k8L7dNn1dUJ8+L5tO3qbdr4ykj8tEa2NzLbePOZrMA8Vo7svxH9eTIWgsVsU3LPxdxwMd01IbL5W4qTpfDlilqrY3dR6oPbmxZpMit39DtruLEBpseKTRe+tfqjsJpNK6W2uWarhROQ6s8cK5rp8mpsmVxEjG8buTsD+vOyDpbHglZW469MHJnrLTjkdg38upyzfj/f7eeGF9TrnY5nJ6hVeXgyrGxsZWD5SpDHqkaKJ7jRzAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABCBN24N603bsvLmCBJffWQmqGo2Jw9vjyHxzCNBVUdzMiuxxBJLLLHEEkssscQSSyyxxBJLLLHEEkssscQSSyyxxBJLLLHETbW14jxsa2pXac7TjsZ/6+b1afrs5+nco0HN75RYYoklllhiiSWWWGKJJZZYYoklllhiiSWWWGKJJZZYYokllljiZiY+lpfjJ+aDmmt+4tHMXHNtUG8ZLRqfGACAnr019Dmlb8vqnNLrIki8NfA5pT96OKuDSqsYEgd+7uzHs1ltfEksscQSSyyxxBJLLLHEEkssscQSSyyxxBJLLLHEEkssscQSSyxxU73diZTnJYLEAAAAAAAAAPCsVpGTd+wK7J0RJL5+956M3PDY3qAeuzGCxNuzGr06Nh/4iNp3SSyxxBJLLLHEEkssscQSSyyxxBJLLLHEEkssscQSSyyxxBJLLHFTE/9kISOPn5gL6kQMic1uJT+7BQAANNjATVm5+d23hPWe5icuHj+Wk+M/nQ/q5HsjSLyQ0/7o0dmfhd0gPSWxxBJLLLHEEkssscQSSyyxxBJLLLHEEkssscQSSyyxxBJLLLHETU3sbbjn5dbmJwYAAAAAgJfP8L7QBx9ldWxUMdz8xMXPTy8GVeV09tvCE0UEiZ+ceSSoKqs7zgsSSyyxxBJLLLHEEkssscQSSyyxxBJLLLHEEkssscQSSyyxxBJL3NTEv7jt9qCqPTkZjCCx2a3kZ7cAAOgmr1dW35HjK6vv3J3TVejup/YG9dj7Iki8bTanvaTZubCn3c2/X2KJJZZYYoklllhiiSWWWGKJJZZYYoklllhiiSWWWGKJJZZYYombmvj4sYwcPzEf1FwMiYdGc3LNtYF9IILEAAAAAAAAAAAAwBJ2VYH9ssrKaASJbw97eP/Mr3IaoD96TGKJJZZYYoklllhiiSWWWGKJJZZYYoklllhiiSWWWGKJJZZYYombmviDM0Ed+fVsTo5HkPhDH94a1ke2ZWWo+YkBAACA3n306rA+tj0rH48g8dNHwm54Vnntd94UQ+KZsLctqrzuWkgsscQSSyyxxBJLLLHEEkssscQSSyyxxBJLLLHEEkssscQSx5vYSEDqIwEGe5If7AEAoOGGi6zs2xXYcPMTF+WenHzik3uDqooIEu/JakPrN6ceDUpiiSWWWGKJJZZYYoklllhiiSWWWGKJJZZYYoklllhiiSWWWGKJG5t4cCEnv31mLqgYEpvdSn52CwAAeJ6Bm7LyqVvC+vRnmp+4ePxYTn53cj6o3++KIPFCVvuRfwi8H7lXYoklllhiiSWWWGKJJZZYYoklllhiiSWWWGKJJZZYYoklllhiiZuauMrKU6H/wAgSAwAQrzsCP5u7L69nm4sInkWuFoM6/WRWBxQsPBHBiQJV2Neszvwxq22aowsSSyyxxBJLLLHEEkssscQSSyyxxBJLLLHEEkssscQSSyyxxBJL3NTEf7o9pNs+uycrgxEkNruV/OwWAAAAuWtFekU7cFc4n/v8s77Q/4X/aBddXuJy87alXb99aRfXPArihnPsS22OYF9q39Nnglr84rn36L7U5amtP9d8i8tsPX/JbHd512LYOwhn/uoGgsQSSyyxxBJLLLHEEkssscQSSyyxxBJLLLHEEkssscQSSyyxxC+rv9UcEXi45kRCLGfQ7gr9JpS/v3ANlvLlpR/i2l3zK5ddhnmu7zIE9JUuw0Nf7TJztCKS2a3W/6acvlZzDb6+3BrU0PxVAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKBpvnF3WN+0pE1z9z9OBVVZ0sYlPvVoUBJL/PIbLgIbkLhhisF7gvrWtyVuWuLFR4I6c5fEEkssscQSSyyxxBJLLLHEEkssscQSSyyxxBJL3FPi9EcCck+cwWBP7okzILHEEkef+InFoJ6WuGlyn91a1mgV2Kj/dE1LPB/2wnleYomRGIn7l/WvZI1IHLxA60VfoCgzHqdvROLQBe6988Vf4J6Mt0eakThwgZn9EkssscQSSyyxxBJLLLHEEkssscQSSyxxEolPhh20Pilx0wzdF9iQxEgsscTdxDneIHE/i1XeH9QDO9JIPJjOOH1xf+BroJ3B/4qtO/e/2IPf+ed5+NdZBU7vr/HhduuDffju/mV9L9/Exb0zQR15cPnZrV5Ugf9aD2Wc+KX+VK6pCvzXklhiiSWWWGKJJZZYYoklllhiiSWWWGKJJZZYYokllljihiUenAvqhMRNSxzB7JbEySuqV0APA/yhv+R5/88LPuLeatJ/g9EzYb+lzsR44FvoB1WeKSRuWuLAj5vNSZxZ4uA/MK+TuGmJA19fn7pPYoklllhiiSWWWGKJJZZYYoklllhiiSWWWGKJJZa4EYkXzwS1aCTgrJGAVzhxcVdgjbob3qOhuwNrNSkxLz2J00/8wHxQJyVumoEdO8P6vjUFAKI2EPi3o50/sKYNU5wIe5Ezt9OaNi3xXNitipfg0XEkrq0V+qFqiZvmh/feE1QlcdM8NBP27rLEEkssscQSSyyxxBJLLLHEEkssscQSSyyxxBJLLHFeiUMfaLijkf/MnBNnTWKJJY4+8enFoCRunDxmt5rv3//SgOCRHKNUAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDE1LTEyLTE0VDE0OjQ3OjE2KzAwOjAw033EwwAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxNS0xMi0xNFQxNDo0NzoxNiswMDowMKIgfH8AAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAAAAElFTkSuQmCC" alt="offset" height="900" width="900">
 </div>
@@ -2033,13 +2049,13 @@ commonPeaks[1:2, ]
     annoDb = &quot;org.Mm.eg.db&quot;)
 </code></pre>
 
-<pre><code>&gt;&gt; preparing features information...         2016-03-10 11:25:31 
-&gt;&gt; identifying nearest features...       2016-03-10 11:25:32 
-&gt;&gt; calculating distance from peak to TSS...  2016-03-10 11:25:32 
-&gt;&gt; assigning genomic annotation...       2016-03-10 11:25:32 
-&gt;&gt; adding gene annotation...             2016-03-10 11:25:42 
-&gt;&gt; assigning chromosome lengths          2016-03-10 11:25:52 
-&gt;&gt; done...                   2016-03-10 11:25:52 
+<pre><code>&gt;&gt; preparing features information...         2016-03-10 11:54:28 
+&gt;&gt; identifying nearest features...       2016-03-10 11:54:29 
+&gt;&gt; calculating distance from peak to TSS...  2016-03-10 11:54:29 
+&gt;&gt; assigning genomic annotation...       2016-03-10 11:54:29 
+&gt;&gt; adding gene annotation...             2016-03-10 11:54:38 
+&gt;&gt; assigning chromosome lengths          2016-03-10 11:54:48 
+&gt;&gt; done...                   2016-03-10 11:54:48 
 </code></pre>
 
 </div>
@@ -2984,6 +3000,150 @@ UpinMel
   [15826]  2.7349368097894e-08 1.94110300146698e-07
   -------
   seqinfo: 22 sequences from an unspecified genome; no seqlengths
+</code></pre>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Session Information</h3>
+<div class="slideContent" >
+<pre><code class="r">sessionInfo()
+</code></pre>
+
+<pre><code>R version 3.2.3 (2015-12-10)
+Platform: x86_64-apple-darwin13.4.0 (64-bit)
+Running under: OS X 10.11.3 (El Capitan)
+
+locale:
+[1] en_GB.UTF-8/en_GB.UTF-8/en_GB.UTF-8/C/en_GB.UTF-8/en_GB.UTF-8
+
+attached base packages:
+[1] stats4    parallel  stats     graphics  grDevices utils     datasets 
+[8] methods   base     
+
+other attached packages:
+ [1] BSgenome.Mmusculus.UCSC.mm9_1.4.0      
+ [2] BSgenome_1.38.0                        
+ [3] rtracklayer_1.30.2                     
+ [4] rGREAT_1.2.0                           
+ [5] goseq_1.22.0                           
+ [6] geneLenDataBase_1.6.0                  
+ [7] BiasedUrn_1.07                         
+ [8] KEGG.db_3.2.2                          
+ [9] ChIPseeker_1.6.6                       
+[10] org.Mm.eg.db_3.2.3                     
+[11] TxDb.Mmusculus.UCSC.mm9.knownGene_3.2.2
+[12] GenomicFeatures_1.22.13                
+[13] AnnotationDbi_1.32.3                   
+[14] DESeq2_1.10.1                          
+[15] RcppArmadillo_0.6.500.4.0              
+[16] Rcpp_0.12.3                            
+[17] ChIPQC_1.6.1                           
+[18] DiffBind_1.16.3                        
+[19] RSQLite_1.0.0                          
+[20] DBI_0.3.1                              
+[21] locfit_1.5-9.1                         
+[22] GenomicAlignments_1.6.3                
+[23] Rsamtools_1.22.0                       
+[24] Biostrings_2.38.4                      
+[25] XVector_0.10.0                         
+[26] limma_3.26.8                           
+[27] SummarizedExperiment_1.0.2             
+[28] Biobase_2.30.0                         
+[29] GenomicRanges_1.22.4                   
+[30] GenomeInfoDb_1.6.3                     
+[31] IRanges_2.4.7                          
+[32] S4Vectors_0.8.11                       
+[33] BiocGenerics_0.16.1                    
+[34] ggplot2_2.0.0                          
+[35] knitr_1.12.3                           
+
+loaded via a namespace (and not attached):
+ [1] amap_0.8-14                            
+ [2] colorspace_1.2-6                       
+ [3] rjson_0.2.15                           
+ [4] hwriter_1.3.2                          
+ [5] futile.logger_1.4.1                    
+ [6] GlobalOptions_0.0.8                    
+ [7] base64enc_0.1-3                        
+ [8] splines_3.2.3                          
+ [9] fail_1.3                               
+[10] geneplotter_1.48.0                     
+[11] Formula_1.2-1                          
+[12] Nozzle.R1_1.1-1                        
+[13] gridBase_0.4-7                         
+[14] annotate_1.48.0                        
+[15] cluster_2.0.3                          
+[16] GO.db_3.2.2                            
+[17] pheatmap_1.0.8                         
+[18] graph_1.48.0                           
+[19] GOstats_2.36.0                         
+[20] assertthat_0.1                         
+[21] Matrix_1.2-3                           
+[22] lazyeval_0.1.10                        
+[23] TxDb.Hsapiens.UCSC.hg19.knownGene_3.2.2
+[24] formatR_1.2.1                          
+[25] acepack_1.3-3.3                        
+[26] tools_3.2.3                            
+[27] gtable_0.1.2                           
+[28] Category_2.36.0                        
+[29] reshape2_1.4.1                         
+[30] systemPipeR_1.4.8                      
+[31] dplyr_0.4.3                            
+[32] ShortRead_1.28.0                       
+[33] gdata_2.17.0                           
+[34] nlme_3.1-122                           
+[35] stringr_1.0.0                          
+[36] gtools_3.5.0                           
+[37] XML_3.98-1.3                           
+[38] edgeR_3.12.0                           
+[39] zlibbioc_1.16.0                        
+[40] scales_0.3.0                           
+[41] RBGL_1.46.0                            
+[42] lambda.r_1.1.7                         
+[43] RColorBrewer_1.1-2                     
+[44] BBmisc_1.9                             
+[45] gridExtra_2.0.0                        
+[46] UpSetR_1.1.0                           
+[47] biomaRt_2.26.1                         
+[48] rpart_4.1-10                           
+[49] latticeExtra_0.6-28                    
+[50] stringi_1.0-1                          
+[51] highr_0.5.1                            
+[52] genefilter_1.52.1                      
+[53] plotrix_3.6-1                          
+[54] checkmate_1.7.1                        
+[55] caTools_1.17.1                         
+[56] boot_1.3-17                            
+[57] BiocParallel_1.4.3                     
+[58] chipseq_1.20.0                         
+[59] BatchJobs_1.6                          
+[60] bitops_1.0-6                           
+[61] evaluate_0.8                           
+[62] lattice_0.20-33                        
+[63] labeling_0.3                           
+[64] GSEABase_1.32.0                        
+[65] AnnotationForge_1.12.2                 
+[66] plyr_1.8.3                             
+[67] magrittr_1.5                           
+[68] sendmailR_1.2-1                        
+[69] R6_2.1.2                               
+[70] gplots_2.17.0                          
+[71] Hmisc_3.17-2                           
+[72] foreign_0.8-66                         
+[73] mgcv_1.8-9                             
+[74] survival_2.38-3                        
+[75] RCurl_1.95-4.7                         
+[76] nnet_7.3-11                            
+[77] futile.options_1.0.0                   
+[78] KernSmooth_2.23-15                     
+[79] GetoptLong_0.1.1                       
+[80] grid_3.2.3                             
+[81] digest_0.6.9                           
+[82] xtable_1.8-2                           
+[83] brew_1.0-6                             
+[84] munsell_0.4.3                          
 </code></pre>
 
 </div>
