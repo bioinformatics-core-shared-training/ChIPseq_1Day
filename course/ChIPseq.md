@@ -885,13 +885,13 @@ peakAnno <- annotatePeak(commonPeaks, tssRegion = c(-1000, 1000), TxDb = TxDb.Mm
 ```
 
 ```
->> preparing features information...		 2016-03-09 23:05:27 
->> identifying nearest features...		 2016-03-09 23:05:28 
->> calculating distance from peak to TSS...	 2016-03-09 23:05:28 
->> assigning genomic annotation...		 2016-03-09 23:05:28 
->> adding gene annotation...			 2016-03-09 23:05:38 
->> assigning chromosome lengths			 2016-03-09 23:05:49 
->> done...					 2016-03-09 23:05:49 
+>> preparing features information...		 2016-03-10 00:18:16 
+>> identifying nearest features...		 2016-03-10 00:18:16 
+>> calculating distance from peak to TSS...	 2016-03-10 00:18:17 
+>> assigning genomic annotation...		 2016-03-10 00:18:17 
+>> adding gene annotation...			 2016-03-10 00:18:28 
+>> assigning chromosome lengths			 2016-03-10 00:18:38 
+>> done...					 2016-03-10 00:18:38 
 ```
 
 Peak annotation
@@ -1340,14 +1340,14 @@ Results files from Meme-ChIP can be found [here](http://mrccsc.github.io/myc_Mem
 
 Time for an exercise
 =========================================================
-Exercise on "Identifying Motifs" can be found [here](http://mrccsc.github.io/ChIPseq_short/course/presentations/practicals/IdentifyingMotifs_Exercises.html).
+Exercise on "Identifying Motifs" can be found [here](http://mrccsc.github.io/ChIPseq_short/course/presentations/practicals/IdentifingMotifs_Exercises.html).
 
 Time for a solution.
 =========================================================
 
-Answers on "Identifying Motifs" can be found [here](http://mrccsc.github.io/ChIPseq_short/course/presentations/practicals/IdentifyingMotifs__Solutions.html).
+Answers on "Identifying Motifs" can be found [here](http://mrccsc.github.io/ChIPseq_short/course/presentations/practicals/IdentifingMotifs_Solutions.html).
 
-Rcode for "Identifying Motifs" solutions can be found [here](http://mrccsc.github.io/ChIPseq_short/course/presentations/practicals/IdentifyingMotifs.R).
+Rcode for "Identifying Motifs" solutions can be found [here](http://mrccsc.github.io/ChIPseq_short/course/presentations/practicals/IdentifingMotifs.R).
 
 
 Getting hold of Data
