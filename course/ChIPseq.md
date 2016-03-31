@@ -23,7 +23,7 @@ In this course we will use a few of the packages from the comprehensive reposito
 
 We will cover some of the basics of quality control, working with peaks, motif identification and functional analysis. 
 
-For more details on alignment, working with ChIP-seq coverage and peak calling you can join us on our extended course.
+For more details on alignment, working with ChIP-seq coverage and peak calling you can join us on [our extended course](https://github.com/ThomasCarroll/chipseqcourseNew).
 
 ========================================================
 
@@ -81,7 +81,7 @@ This data is composed of Myc chip for two cell lines, Mel and Ch12 cell lines, e
 
 Due to the short time we have together the data has been processed from unaligned reads to called peaks. 
 
-For full details on the analysis/processing of this data with all analysis steps covered in R/Bioconductor you can visit our course.
+For full details on the analysis/processing of this data with all analysis steps covered in R/Bioconductor are available on [github](https://github.com/ThomasCarroll/chipseqcourseNew/).
 
 Materials.
 ========================================================
@@ -129,7 +129,7 @@ Set the Working directory
 
 Before running any of the code in the practicals or slides we need to set the working directory to the folder we unarchived. 
 
-You may navigate to the unarchived ChIPseq_short folder in the Rstudio menu
+You may navigate to the unarchived ChIPseq_1Day folder in the Rstudio menu
 
 **Session -> Set Working Directory -> Choose Directory**
 
@@ -137,8 +137,8 @@ or in the console.
 
 
 ```r
-setwd("/PathToMyDownload/ChIPseq_short/course")
-# e.g. setwd("~/Downloads/ChIPseq_short/course")
+setwd("/PathToMyDownload/ChIPseq_1Day/course")
+# e.g. setwd("~/Downloads/ChIPseq_1Day/course")
 ```
 
 
@@ -175,6 +175,18 @@ For some discussions:
 * When and what QC is useful.
 
 [Impact of artifact removal on ChIP quality metrics in ChIP-seq and ChIP-exo data.Front Genet. 2014 Apr 10;5:75.Carroll TS, Liang Z, Salama R, Stark R, de Santiago I](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3989762/)
+
+Quality Control - Always have an appropriate input.
+========================================================
+
+* Input samples are typically made from fragmented DNA prior to IP enrichment.
+
+* Allows for control of artefact regions which occur across samples.
+
+* NEVER run ChIP-seq without considering which input to use.
+
+e.g. When using tumour samples for ChIP-seq, it is important to have matched input samples. 
+Differing conditions of same tissue may share common input. 
 
 Quality Control - Quality metrics for ChIP-seq.
 ========================================================
@@ -315,6 +327,28 @@ For a note on known Blacklisted regions and on associated resources.
 For a note on SSD
 * [SSD and Signal Pileup](http://mrccsc.github.io/analysisbeginings.html#/36).
 
+Quality Control - Blacklist???
+========================================================
+
+<div align="center">
+<img src="imgs/blacklist.png" alt="offset" height="900" width="1000">
+</div>
+
+
+Quality Control - Blacklist affects many metrics.
+========================================================
+
+<div align="center">
+<img src="imgs/blacklistsAffects.jpg" alt="offset" height="900" width="1300">
+</div>
+
+
+Quality Control - Blacklist affects many metrics.
+========================================================
+
+<div align="center">
+<img src="imgs/ssdAndBlacklist.png" alt="offset" height="900" width="600">
+</div>
 
 
 
@@ -363,7 +397,7 @@ id: peakpushing
 
 Macs2 is a frequently used peak caller and works well to identify both punctate and broad peaks.
 
-For more details on peak calling steps for data in this course you can visit our material.
+For more details on peak calling steps for data in this course you can visit our [material](https://github.com/ThomasCarroll/chipseqcourseNew/blob/master/Precticals_pres/peakCallingForMyc).
 
 For more details on MACS2, see the github page for MACS2 software
 * [MACS2 github page](https://github.com/taoliu/MACS).
@@ -937,13 +971,13 @@ peakAnno <- annotatePeak(commonPeaks, tssRegion = c(-1000, 1000), TxDb = TxDb.Mm
 ```
 
 ```
->> preparing features information...		 2016-03-10 11:54:28 
->> identifying nearest features...		 2016-03-10 11:54:29 
->> calculating distance from peak to TSS...	 2016-03-10 11:54:29 
->> assigning genomic annotation...		 2016-03-10 11:54:29 
->> adding gene annotation...			 2016-03-10 11:54:38 
->> assigning chromosome lengths			 2016-03-10 11:54:48 
->> done...					 2016-03-10 11:54:48 
+>> preparing features information...		 2016-03-31 17:52:12 
+>> identifying nearest features...		 2016-03-31 17:52:13 
+>> calculating distance from peak to TSS...	 2016-03-31 17:52:13 
+>> assigning genomic annotation...		 2016-03-31 17:52:13 
+>> adding gene annotation...			 2016-03-31 17:52:23 
+>> assigning chromosome lengths			 2016-03-31 17:52:33 
+>> done...					 2016-03-31 17:52:33 
 ```
 
 Peak annotation
@@ -1852,7 +1886,7 @@ sessionInfo()
 ```
 R version 3.2.3 (2015-12-10)
 Platform: x86_64-apple-darwin13.4.0 (64-bit)
-Running under: OS X 10.11.3 (El Capitan)
+Running under: OS X 10.11.4 (El Capitan)
 
 locale:
 [1] en_GB.UTF-8/en_GB.UTF-8/en_GB.UTF-8/C/en_GB.UTF-8/en_GB.UTF-8
