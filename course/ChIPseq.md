@@ -971,13 +971,13 @@ peakAnno <- annotatePeak(commonPeaks, tssRegion = c(-1000, 1000), TxDb = TxDb.Mm
 ```
 
 ```
->> preparing features information...		 2016-03-31 17:52:12 
->> identifying nearest features...		 2016-03-31 17:52:13 
->> calculating distance from peak to TSS...	 2016-03-31 17:52:13 
->> assigning genomic annotation...		 2016-03-31 17:52:13 
->> adding gene annotation...			 2016-03-31 17:52:23 
->> assigning chromosome lengths			 2016-03-31 17:52:33 
->> done...					 2016-03-31 17:52:33 
+>> preparing features information...		 2016-03-31 18:00:47 
+>> identifying nearest features...		 2016-03-31 18:00:47 
+>> calculating distance from peak to TSS...	 2016-03-31 18:00:48 
+>> assigning genomic annotation...		 2016-03-31 18:00:48 
+>> adding gene annotation...			 2016-03-31 18:00:59 
+>> assigning chromosome lengths			 2016-03-31 18:01:12 
+>> done...					 2016-03-31 18:01:12 
 ```
 
 Peak annotation
